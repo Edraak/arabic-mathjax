@@ -1,0 +1,8 @@
+dev:
+  working_dir: /code/
+  command: browser-sync start --server --files ''
+
+  volumes:
+    - "mathjax:/code/mathjax"
+    - "third-party-extensions:/code/extensions"
+    - "arabic-test-cases:/code/test-cases"
