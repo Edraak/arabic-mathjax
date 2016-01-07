@@ -1,0 +1,26 @@
+{
+  "name": "mathjax-dev",
+  "version": "1.0.0",
+  "description": "A docker container for developing my MathJax plugins.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Edraak/mathjax-dev.git"
+  },
+  "devDependencies": {
+    "browser-sync": "2.6.5",
+    "gulp-plumber": "1.0.0",
+    "gulp-uglify": "1.2.0",
+    "gulp": "3.8.11"
+  },
+  "author": "Omar Al-Ithawi <i@omardo.com>",
+  "generator": "Quench <http://quenchjs.com/>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Edraak/mathjax-dev/issues"
+  },
+  "homepage": "https://github.com/Edraak/mathjax-dev"
+}

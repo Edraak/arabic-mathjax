@@ -1,10 +1,12 @@
 testcases:
-  working_dir: /code/testcases
-  image: ustwo/browser-sync
-  command: start --server --port 80 --files "*.html"
+  build: .
+
+  working_dir: /code/
+  environment:
+    PORT: "80"
+  command: node node_modules/.bin/gulp
 
   volumes:
-    - "./mathjax/:/code/mathjax"
     - "./extensions/:/code/extensions"
     - "./testcases/:/code/testcases"
 
