@@ -8,7 +8,7 @@ gulp.task('browser-sync', function() {
   browserSync({
     port: process.env.PORT || 3000,
     server: {
-       baseDir: '/code/testcases/'
+       baseDir: '/code/'
     }
   });
 });

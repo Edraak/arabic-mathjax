@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <title>MathJax Dynamic Math Test Page</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Amiri&amp;subset=arabic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css" rel="stylesheet" type="text/css">
+
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="http://media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.3/mustache.js"></script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.5-latest/unpacked/MathJax.js?config=TeX-MML-AM_HTMLorMML-full"></script>
+
+    <script type="text/javascript" src="testcases.js"></script>
+    <script type="text/javascript" src="render-equations.js"></script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        'HTML-CSS': {
+          scale: 125
+        },
+        extensions: ["[Contrib]/arabic/arabic.js"]
+      });
+
+      MathJax.Ajax.config.path["Contrib"] = "http://testcases.127.0.0.1.xip.io/extensions";
+
+      MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+        console.log(message);
+      });
+
+      MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+        console.log(message);
+      });
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="equations"></div>
+    </div>
+</body>
+</html>
