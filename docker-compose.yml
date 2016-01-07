@@ -1,37 +1,21 @@
 testcases:
-  working_dir: /code/test-cases
+  working_dir: /code/testcases
   image: ustwo/browser-sync
   command: start --server --port 80 --files "*.html"
 
   volumes:
-    - "mathjax:/code/mathjax"
-    - "third-party-extensions:/code/extensions"
-    - "arabic-test-cases:/code/test-cases"
-
-
-extensions:
-  image: python:2.7
-  working_dir: /code/
-  command: python -m SimpleHTTPServer 80
-  volumes:
-    - "third-party-extensions:/code/"
-
-
-mathjax:
-  image: python:2.7
-  working_dir: /code/
-  command: python -m SimpleHTTPServer 80
-  volumes:
-    - "mathjax:/code/"
+    - "./mathjax/:/code/mathjax"
+    - "./extensions/:/code/extensions"
+    - "./testcases/:/code/testcases"
 
 
 nginx:
   image: nginx
   ports:
     - "80:80"
+  volumes_from:
+    - "testcases:ro"
   volumes:
-    - "nginx.conf:/etc/nginx/nginx.conf"
+    - "./nginx.conf:/etc/nginx/conf.d/default.conf"
   links:
-    - mathjax
-    - extensions
     - testcases
