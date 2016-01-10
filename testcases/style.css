@@ -16,19 +16,3 @@ hr {
 .MathJax_Display {
     margin: 20px auto;
 }
-
-
-.mfliph {
-  display: inline-block !important;
-  -moz-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  transform: scaleX(-1);
-  -ms-filter: fliph;
-  filter: fliph;
-}
-
-.mar {
-  font-family: Amiri !important;
-  font-style: normal !important;
-}
