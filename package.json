@@ -12,10 +12,12 @@
   },
   "devDependencies": {
     "browser-sync": "2.6.5",
+    "gulp": "3.8.11",
+    "gulp-jshint": "^2.0.0",
     "gulp-plumber": "1.0.0",
-    "gulp-uglify": "1.2.0",
     "gulp-replace": "^0.5.4",
-    "gulp": "3.8.11"
+    "gulp-uglify": "1.2.0",
+    "jshint": "^2.8.0"
   },
   "author": "Omar Al-Ithawi <i@omardo.com>",
   "generator": "Quench <http://quenchjs.com/>",

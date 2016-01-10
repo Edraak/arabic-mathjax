@@ -3,6 +3,7 @@ var plumber = require('gulp-plumber');
 var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var replace = require('gulp-replace');
+var jshint = require('gulp-jshint');
 
 
 gulp.task('browser-sync', function() {
@@ -27,6 +28,7 @@ gulp.task('scripts', function() {
         console.log(error.message);
         this.emit('end');
     }}))
+    .pipe(jshint())
     .pipe(replace('[Contrib]/arabic/unpacked/', '[Contrib]/arabic/'))
     .pipe(uglify())
     .pipe(gulp.dest('/code/extensions/arabic/'))

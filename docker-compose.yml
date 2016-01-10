@@ -1,5 +1,6 @@
-testcases:
-  build: .
+main:
+  image: node:0.12.9
+  restart: always
 
   working_dir: /code/
   environment:
@@ -10,5 +11,4 @@ testcases:
     - "80:80"
 
   volumes:
-    - "./extensions/:/code/extensions"
-    - "./testcases/:/code/testcases"
+    - ".:/code/"
