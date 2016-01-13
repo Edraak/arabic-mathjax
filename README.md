@@ -1,4 +1,4 @@
-# mathjax-dev
+# Arabic MathJax extension Dev Environment
 A docker container for developing the [MathJax Arabic extension](https://github.com/mathjax/MathJax-third-party-extensions/pull/20).
 
 
