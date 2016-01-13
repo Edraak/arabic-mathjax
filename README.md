@@ -1,5 +1,5 @@
 # mathjax-dev
-A docker container for developing my MathJax plugins.
+A docker container for developing the [MathJax Arabic extension](https://github.com/mathjax/MathJax-third-party-extensions/pull/20).
 
 
 
