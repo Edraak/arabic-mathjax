@@ -1,5 +1,12 @@
-MathJax.Hub.Register.StartupHook('Arabic Ext Dict Ready', function () {
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
+MathJax.Hub.Config({
+  TeX: {
+    // Needed to provide the method `GetArgumentMML`
+    extensions: ['HTML.js']
+  }
+});
+
+MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  MathJax.Hub.Register.StartupHook('TeX HTML Ready', function () {
     var TEX = MathJax.InputJax.TeX;
     var TEXDEF = TEX.Definitions;
 
@@ -13,7 +20,7 @@ MathJax.Hub.Register.StartupHook('Arabic Ext Dict Ready', function () {
 
     TEX.Parse.Augment({
       HandleArabic: function (name) {
-        if (MathJax.Arabic.IsArabicPage()) {
+        if (MathJax.Hub.config.Arabic.isArabicPage) {
           this.MarkAsArabic(name);
         }
       },
@@ -32,6 +39,7 @@ MathJax.Hub.Register.StartupHook('Arabic Ext Dict Ready', function () {
       },
       flipHorizontal: function (token) {
         return token.With({
+          // Invert the value, because flipping twice means, it is not flipped
           fliph: !token.Get('fliph')
         });
       }

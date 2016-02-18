@@ -1,7 +1,9 @@
-;(function () {
-  MathJax.Arabic = {
-    Dict: {},
-    NumbersMap: {
+MathJax.Hub.Config({
+  Arabic: {
+    dict: {},
+    isArabicPage: (document.documentElement.lang === 'ar'),
+    identifiersMap: {},
+    numbersMap: {
       '0': '٠',
       '1': '١',
       '2': '٢',
@@ -13,64 +15,54 @@
       '8': '٨',
       '9': '٩'
     },
-    OperatorsMap: {
+    operatorsMap: {
       // English to Arabic comma
       ',': '،'
-    },
-    IdentifiersMap: {},
-    AugmentObject: function (obj, augments) {
-      Object.keys(augments).forEach(function (key) {
-        obj[key] = augments[key];
-      });
-    },
-    AugmentDict: function (dict) {
-      MathJax.Arabic.AugmentObject(MathJax.Arabic.Dict, dict);
-    },
-    ArabicTeX: function (english, arabic) {
-      return function (name) {
-        var TEX = MathJax.InputJax.TeX;
-
-        var tex;
-        if ('ar' === this.stack.env.lang) {
-          tex = arabic;
-        } else {
-          tex = english;
-        }
-
-        this.Push(TEX.Parse(tex).mml());
-      };
-    },
-    ArabicText: function (english, arabicText) {
-      return MathJax.Arabic.ArabicTeX(english, '\\fliph{\\text{' + arabicText + '}}');
-    },
-    ArabicTextWithSpace: function (english, arabicText) {
-      var arabic = '\\ \\fliph{\\text{' + arabicText + '}}';
-
-      return function (name) {
-        var TEX = MathJax.InputJax.TeX;
-
-        if ('ar' === this.stack.env.lang) {
-          this.Push(TEX.Parse(arabic).mml());
-        } else {
-          this.Push(TEX.Parse(english).mml());
-        }
-      };
-    },
-    ArabicSymbols: function (english, arabicSymbols) {
-      var arabicTeX = arabicSymbols.replace(
-        /([\u0600-\u06FF]+)/g, // Match Arabic language
-        '\\fliph{\\text{$1}}'
-      );
-
-      return MathJax.Arabic.ArabicTeX(english, arabicTeX);
-    },
-    SetArabicDetector: function (arabicDetector) {
-      MathJax.Arabic.IsArabicPage = arabicDetector;
-    },
-    IsArabicPage: function () {
-      return document.documentElement.lang === 'ar';
     }
-  };
+  }
+});
 
-  MathJax.Hub.Post('Arabic Ext Dict Ready');
-})();
+
+MathJax.Arabic = {
+  TeX: function (english, arabic) {
+    return function (name) {
+      var TEX = MathJax.InputJax.TeX;
+
+      var tex;
+      if ('ar' === this.stack.env.lang) {
+        tex = arabic;
+      } else {
+        tex = english;
+      }
+
+      this.Push(TEX.Parse(tex).mml());
+    };
+  },
+  Text: function (english, arabicText) {
+    return MathJax.Arabic.TeX(english, '\\fliph{\\text{' + arabicText + '}}');
+  },
+  TextWithSpace: function (english, arabicText) {
+    var arabic = '\\ \\fliph{\\text{' + arabicText + '}}';
+
+    return function (name) {
+      var TEX = MathJax.InputJax.TeX;
+
+      if ('ar' === this.stack.env.lang) {
+        this.Push(TEX.Parse(arabic).mml());
+      } else {
+        this.Push(TEX.Parse(english).mml());
+      }
+    };
+  },
+  Symbols: function (english, arabicSymbols) {
+    var arabicTeX = arabicSymbols.replace(
+      /([\u0600-\u06FF]+)/g, // Match Arabic language
+      '\\fliph{\\text{$1}}'
+    );
+
+    return MathJax.Arabic.TeX(english, arabicTeX);
+  }
+};
+
+
+MathJax.Hub.Startup.signal.Post('Arabic TeX Startup');
