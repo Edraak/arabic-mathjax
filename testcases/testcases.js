@@ -39,6 +39,8 @@ var EQUATIONS = [
     ['36', 'Max Watt', '\\Watt_\\max'],
     ['37', 'Fill Factor', '\\FF'],
     ['38', 'Photovoltaic Energy', '\\P_\\inn'],
+    ['39', 'Limits', 'e^x=\\lim_{n\\to\\infty} \\left( 1+\\frac{x}{n} \\right)^n'],
+    ['40', 'Limits #2', 'e^x=\\lim_{4578545n\\to\\infty} y'],
 ].map(function (el) {
     return {
         id: el[0],
