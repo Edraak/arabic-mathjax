@@ -31,8 +31,7 @@ gulp.task('scripts', function() {
     }}))
     .pipe(concat('arabic.js'))
     .pipe(jshint())
-    //.pipe(replace('[Contrib]/arabic/unpacked/', '[Contrib]/arabic/'))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('/code/extensions/arabic/'))
     .pipe(browserSync.reload({stream: true}))
 });
