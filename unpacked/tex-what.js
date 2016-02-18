@@ -1,4 +1,4 @@
-MathJax.Hub.Register.StartupHook('Arabic Ext TeX Ready', function () {
+MathJax.Hub.Register.StartupHook('Arabic TeX Ready', function () {
   MathJax.Hub.Register.StartupHook('TeX HTML Ready', function () {
     var TEX = MathJax.InputJax.TeX;
 

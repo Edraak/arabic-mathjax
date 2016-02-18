@@ -25,6 +25,6 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
       return parsers;
     }());
 
-    MathJax.Hub.Startup.signal.Post('Arabic Ext TeX Ready');
+    MathJax.Hub.Startup.signal.Post('Arabic TeX Ready');
   });
 });

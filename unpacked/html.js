@@ -22,7 +22,7 @@ MathJax.Hub.Config({
 
 MathJax.Hub.Register.StartupHook('mml Jax Ready', function () {
   MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
-    MathJax.Hub.Register.StartupHook('Arabic Ext TeX Ready', function () {
+    MathJax.Hub.Register.StartupHook('Arabic TeX Ready', function () {
       var MML = MathJax.ElementJax.mml;
 
       var flipHorizontalElement = function (token, element) {
