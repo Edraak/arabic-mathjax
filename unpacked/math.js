@@ -9,6 +9,17 @@ MathJax.Hub.Config({
   }
 });
 
+
+MathJax.Hub.Config({
+  Arabic: {
+    // Limits
+    operatorsMap: {
+      'lim': 'نهــا'
+    }
+  }
+});
+
+
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Better localized Zero
   var TeX = MathJax.Arabic.TeX;
@@ -46,4 +57,3 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
     });
   });
 });
-
