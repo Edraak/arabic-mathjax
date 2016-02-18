@@ -25,6 +25,8 @@ MathJax.Hub.Config({
 
 MathJax.Arabic = {
   TeX: function (english, arabic) {
+    // Creates a translated TeX macro.
+
     return function (name) {
       var TEX = MathJax.InputJax.TeX;
 
@@ -39,9 +41,13 @@ MathJax.Arabic = {
     };
   },
   Text: function (english, arabicText) {
+    // Creates a translated TeX macro, with an Arabic plain text.
+
     return MathJax.Arabic.TeX(english, '\\fliph{\\text{' + arabicText + '}}');
   },
   TextWithSpace: function (english, arabicText) {
+    // Just like `Text` but adds one space before the Arabic text.
+
     var arabic = '\\ \\fliph{\\text{' + arabicText + '}}';
 
     return function (name) {
@@ -55,12 +61,14 @@ MathJax.Arabic = {
     };
   },
   Symbols: function (english, arabicSymbols) {
-    var arabicTeX = arabicSymbols.replace(
-      /([\u0600-\u06FF]+)/g, // Match Arabic language
-      '\\fliph{\\text{$1}}'
-    );
+    // Creates a translated TeX macro that converts Arabic symbols into text nodes,
+    // and treats everything else as normal TeX.
 
-    return MathJax.Arabic.TeX(english, arabicTeX);
+    var arabicLanguageRegExp = /([\u0600-\u06FF]+)/g;
+
+    var arabic = arabicSymbols.replace(arabicLanguageRegExp, '\\fliph{\\text{$1}}');
+
+    return MathJax.Arabic.TeX(english, arabic);
   }
 };
 
