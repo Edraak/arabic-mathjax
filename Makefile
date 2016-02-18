@@ -1,6 +1,6 @@
 correct_perms:
-	sudo chown -R $$USER:$$USER .
-	chmod a+r -R .
+	sudo chown -R $$USER .
+	chmod -R a+r .
 	find extensions/ testcases/ -type d -exec chmod a+x {} \;
 
 

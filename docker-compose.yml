@@ -1,6 +1,5 @@
 main:
   image: node:0.12.9
-  restart: always
 
   working_dir: /code/
   environment:

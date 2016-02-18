@@ -4,6 +4,7 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var replace = require('gulp-replace');
 var jshint = require('gulp-jshint');
+var concat = require('gulp-concat');
 
 
 gulp.task('browser-sync', function() {
@@ -22,15 +23,16 @@ gulp.task('bs-reload', function () {
 
 
 gulp.task('scripts', function() {
-  return gulp.src('/code/extensions/arabic/unpacked/*.js')
+  return gulp.src('/code/extensions/arabic/unpacked/**/*.js')
     .pipe(plumber({
       errorHandler: function (error) {
         console.log(error.message);
         this.emit('end');
     }}))
+    .pipe(concat('arabic.js'))
     .pipe(jshint())
-    .pipe(replace('[Contrib]/arabic/unpacked/', '[Contrib]/arabic/'))
-    .pipe(uglify())
+    //.pipe(replace('[Contrib]/arabic/unpacked/', '[Contrib]/arabic/'))
+    //.pipe(uglify())
     .pipe(gulp.dest('/code/extensions/arabic/'))
     .pipe(browserSync.reload({stream: true}))
 });
