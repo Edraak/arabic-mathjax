@@ -12,19 +12,26 @@
     <script type="text/javascript" src="http://media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.3/mustache.js"></script>
 
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.6-latest/unpacked/MathJax.js?config=TeX-MML-AM_HTMLorMML-full"></script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/2.6-latest/unpacked/MathJax.js?config=TeX-MML-AM_HTMLorMML-full"></script>
 
     <script type="text/javascript" src="testcases.js"></script>
     <script type="text/javascript" src="render-equations.js"></script>
 
     <script type="text/x-mathjax-config">
       MathJax.Ajax.config.path["Contrib"] = "http://testcases.127.0.0.1.xip.io/extensions";
+      MathJax.Ajax.config.path["Test"] = "http://testcases.127.0.0.1.xip.io/testcases/test-extensions";
 
       MathJax.Hub.Config({
         'HTML-CSS': {
           scale: 125
         },
-        extensions: ["[Contrib]/arabic/arabic.js"]
+        extensions: [
+          "[Contrib]/arabic/arabic.js",
+          "[Test]/phys1.js",
+          "[Test]/hacks.js",
+          "[Test]/phys2.js"
+        ]
       });
 
       MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
@@ -38,8 +45,8 @@
 </head>
 
 <body>
-    <div id="wrapper">
-        <div id="equations"></div>
-    </div>
+<div id="wrapper">
+    <div id="equations"></div>
+</div>
 </body>
 </html>
