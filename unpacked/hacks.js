@@ -1,8 +1,10 @@
 MathJax.Hub.Config({
-  // Decimal mark
+  // TODO: Remove this hack?
+  // Arabic decimal mark
   Arabic: {
     numbersMap: {
       '\\.': '٫'
     }
   }
 });
+

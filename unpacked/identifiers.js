@@ -6,7 +6,7 @@ MathJax.Hub.Config({
       'a': 'ا',
 
       // Variable name
-      // TODO: Use Arabic letter dotless beh 0x66e instead
+      // TODO: Consider using Arabic letter dotless beh 0x66e instead
       'b': 'ب',
 
       // Variable name.
@@ -23,7 +23,7 @@ MathJax.Hub.Config({
       'n': 'ن',
 
       // Function name
-      // TODO: Use dotless qaf (ٯ) instead
+      // TODO: Consider using dotless qaf (ٯ) instead
       'f': 'ق',
 
       // Function name

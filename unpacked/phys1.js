@@ -1,4 +1,6 @@
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  // Stuff, that I've just copied!
+
   var Text = MathJax.Arabic.Text;
   var TeX = MathJax.Arabic.TeX;
   var Symbols = MathJax.Arabic.Symbols;
@@ -28,13 +30,14 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  // Physics Names
+
   var Text = MathJax.Arabic.Text;
   var Symbols = MathJax.Arabic.Symbols;
 
   MathJax.Hub.Config({
     Arabic: {
       dict: {
-        // physNames
         "AirMassAr": ["AM", Text('AM', 'كتلة هواء')],
         "ShortCircuitAr": ["sc", Symbols('sc', 'ق')],
         "PhotovoltaicEnergyAr": ["P", Symbols('P', 'ط')],
@@ -49,13 +52,14 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  // Physics Constants
+
   var Text = MathJax.Arabic.Text;
   var TeX = MathJax.Arabic.TeX;
 
   MathJax.Hub.Config({
     Arabic: {
       dict: {
-        // pyhsConsts
         "LightSpeedAr": ["lspeed", Text('c', 'سرعة الضوء')],
         "PlancksAr": ["Plancks", Text('\\hbar', 'ثابت بلانك')],
         "BoltzmannsAr": ["Boltzmanns", Text('k', 'ثابت بولتزمان')],
@@ -67,12 +71,13 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  // Chemistry Units
+
   var Text = MathJax.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
       dict: {
-        // chmUnits
         "PHAr": ["ph", Text('ph', 'ف')],
         "ElectronAr": ["elctrn", Text('n', 'الكترون')]
       }
@@ -82,12 +87,13 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  // Other Physics Units
+
   var Text = MathJax.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
       dict: {
-        // physUnits
         "SecondsAr": ["scnd", Text('s', 'ث')],
         "HourAr": ["hour", Text('h', 'ساعة')],
         "DayAr": ["day", Text('\\text{day}', 'يوم')],
@@ -107,31 +113,19 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  // Misc
+
   var Text = MathJax.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
       dict: {
-        // misc
         "MaxAr": ["max", Text('p', 'اقصى')]
       }
     }
   });
 });
 
-
-MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
-  // Zero, in Arabic and English
-  var TeX = MathJax.Arabic.TeX;
-
-  MathJax.Hub.Config({
-    Arabic: {
-      dict: {
-        "ZeroAr": ["zero", TeX('0', '\\text{0}')]
-      }
-    }
-  });
-});
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Amplifiers

@@ -1,10 +1,58 @@
-MathJax.Hub.Register.StartupHook('Arabic TeX Ready', function () {
+MathJax.Hub.Config({
+  TeX: {
+    // Needed to provide the method `GetArgumentMML`
+    extensions: ['HTML.js']
+  }
+});
+
+MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   MathJax.Hub.Register.StartupHook('TeX HTML Ready', function () {
     var TEX = MathJax.InputJax.TeX;
-
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
+    var dict = MathJax.Hub.config.Arabic.dict;
+
+
+    TEX.Definitions.Add({
+      macros: {
+        'ar': 'HandleArabic',
+        'alwaysar': 'MarkAsArabic',
+        'fliph': 'HandleFlipHorizontal'
+      }
+    });
+
+
+    TEX.Definitions.Add({
+      macros: function () {
+        var definitions = {};
+
+        Object.keys(dict).forEach(function (key) {
+          var texCommand = dict[key][0];
+          definitions[texCommand] = key;
+        });
+
+        return definitions;
+      }()
+    });
+
+
+    TEX.Parse.Augment(function () {
+      var parsers = {};
+
+      Object.keys(dict).forEach(function (key) {
+        parsers[key] = dict[key][1]; // Parser function
+      });
+
+      return parsers;
+    }());
+
 
     TEX.Parse.Augment({
+      flipHorizontal: function (token) {
+        return token.With({
+          // Invert the value, because flipping twice means, it is not flipped
+          fliph: !token.Get('fliph')
+        });
+      },
       arabicNumber: function (token) {
         var numbersMap = MathJax.Hub.config.Arabic.numbersMap;
         var text = token.data[0].data[0];
@@ -92,7 +140,27 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Ready', function () {
           }
         }
         return parsedToken;
+      },
+      HandleArabic: function (name) {
+        if (MathJax.Hub.config.Arabic.isArabicPage) {
+          this.MarkAsArabic(name);
+        }
+      },
+      MarkAsArabic: function (name) {
+        this.stack.env.lang = 'ar';
+
+        var arg = this.GetArgumentMML(name);
+
+        this.Push(this.flipHorizontal(arg).With({
+          lang: 'ar'
+        }));
+      },
+      HandleFlipHorizontal: function (name) {
+        var arg = this.GetArgumentMML(name);
+        this.Push(this.flipHorizontal(arg));
       }
     });
+
+    MathJax.Hub.Startup.signal.Post('Arabic TeX Ready');
   });
 });
