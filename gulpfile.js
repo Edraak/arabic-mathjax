@@ -5,6 +5,7 @@ var browserSync = require('browser-sync');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var order = require('gulp-order');
+var map = require('map-stream');
 
 
 gulp.task('browser-sync', function () {
@@ -35,7 +36,14 @@ gulp.task('scripts', function () {
       '**/*.js'
     ]))
     .pipe(concat('arabic.js'))
-    .pipe(jshint())
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(map(function (file, cb) {
+      if (!file.jshint.success) {
+        console.error('jshint failed');
+        process.exit(1);
+      }
+    }))
     .pipe(uglify({
       preserveComments: 'some'
     }))

@@ -2,3 +2,4 @@
 /node_modules/
 /mathjax/
 /.idea
+.DS_Store
