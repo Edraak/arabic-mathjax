@@ -2,11 +2,8 @@ var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
-var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var order = require('gulp-order');
-var map = require('map-stream');
-
 
 gulp.task('browser-sync', function () {
   browserSync({
@@ -23,6 +20,13 @@ gulp.task('bs-reload', function () {
 });
 
 
+gulp.task('jshint', function () {
+  return gulp.src('/code/extensions/arabic/unpacked/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+
 gulp.task('scripts', function () {
   return gulp.src('/code/extensions/arabic/unpacked/**/*.js')
     .pipe(plumber({
@@ -36,14 +40,6 @@ gulp.task('scripts', function () {
       '**/*.js'
     ]))
     .pipe(concat('arabic.js'))
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(map(function (file, cb) {
-      if (!file.jshint.success) {
-        console.error('jshint failed');
-        process.exit(1);
-      }
-    }))
     .pipe(uglify({
       preserveComments: 'some'
     }))

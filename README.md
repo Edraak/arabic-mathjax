@@ -4,6 +4,6 @@ A docker container for developing the [MathJax Arabic extension](https://github.
 
 
     $ git clone git@github.com:Edraak/MathJax-third-party-extensions.git extensions
-    $ docker-compose build
+    $ git clone git@github.com:mathjax/MathJax mathjax
     $ make init
     $ docker-compose up
