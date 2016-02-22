@@ -41,6 +41,9 @@ var EQUATIONS = [
     ['38', 'Photovoltaic Energy', '\\P_\\inn'],
     ['39', 'Limits', 'e^x=\\lim_{n\\to\\infty} \\left( 1+\\frac{x}{n} \\right)^n'],
     ['40', 'Limits #2', 'e^x=\\lim_{4578545n\\to\\infty} y'],
+    ['41', 'F prime of x', 'y = f^\\prime(x)'],
+    ['42', 'F double prime of x', 'y = f^{\\prime\\prime}(x)'],
+    ['43', 'F triple prime of x', 'y = f^{\\prime\\prime\\prime}(x)'],
 ].map(function (el) {
     return {
         id: el[0],
