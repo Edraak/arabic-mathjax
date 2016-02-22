@@ -1,12 +1,5 @@
-MathJax.Hub.Config({
-  TeX: {
-    // Needed to provide the method `GetArgumentMML`
-    extensions: ['HTML.js']
-  }
-});
-
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
-  MathJax.Hub.Register.StartupHook('TeX HTML Ready', function () {
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     var TEX = MathJax.InputJax.TeX;
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
     var dict = MathJax.Hub.config.Arabic.dict;
@@ -126,6 +119,19 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
         return token;
       },
+      _getArgumentMML: function (name) {
+        //  returns an argument that is a single MathML element
+        //  (in an mrow if necessary)
+        //
+        //  This functions has been copied here from extensions/TeX/HTML.js, to avoid
+        //  adding a dependency.
+        //
+        //  TODO: Consider importing (as a dependency) this from HTML.js instead!
+        var arg = this.ParseArg(name);
+        if (arg.inferred && arg.data.length == 1)
+          {arg = arg.data[0]} else {delete arg.inferred}
+        return arg;
+      },
       mmlToken: function (token) {
         // TODO: Check for possible incompatibility with boldsymbol extension
         var parsedToken = texParseMMLToken.apply(this, [token]);
@@ -149,14 +155,14 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
       MarkAsArabic: function (name) {
         this.stack.env.lang = 'ar';
 
-        var arg = this.GetArgumentMML(name);
+        var arg = this._getArgumentMML(name);
 
         this.Push(this.flipHorizontal(arg).With({
           lang: 'ar'
         }));
       },
       HandleFlipHorizontal: function (name) {
-        var arg = this.GetArgumentMML(name);
+        var arg = this._getArgumentMML(name);
         this.Push(this.flipHorizontal(arg));
       }
     });
