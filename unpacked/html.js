@@ -69,7 +69,7 @@ MathJax.Hub.Register.StartupHook('mml Jax Ready', function () {
         }
       });
 
-      ['mn', 'mo', 'mtext', 'msubsup', 'mrow'].forEach(function (name) {
+      ['mn', 'mo', 'mtext', 'msubsup', 'mrow', 'mfrac'].forEach(function (name) {
         var originalToHTML = MML[name].prototype.toHTML;
 
         MML[name].Augment({

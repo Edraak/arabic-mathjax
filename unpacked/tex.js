@@ -51,16 +51,11 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
         var text = token.data[0].data[0];
         var mapped = text;
 
-        if ('0' === mapped) {
-          // Special case for the Arabic zero
-          mapped = 'صفر';
-        } else {
-          Object.keys(numbersMap).forEach(function (arabicNumber) {
-            var hindiNumber = numbersMap[arabicNumber];
-            var regex = new RegExp('' + arabicNumber, 'g');
-            mapped = mapped.replace(regex, hindiNumber);
-          });
-        }
+        Object.keys(numbersMap).forEach(function (arabicNumber) {
+          var hindiNumber = numbersMap[arabicNumber];
+          var regex = new RegExp('' + arabicNumber, 'g');
+          mapped = mapped.replace(regex, hindiNumber);
+        });
 
         if (mapped !== text) {
           token.data[0].data[0] = mapped;
