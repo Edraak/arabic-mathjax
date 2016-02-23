@@ -44,6 +44,16 @@ var EQUATIONS = [
     ['41', 'F prime of x', 'y = f^\\prime(x)'],
     ['42', 'F double prime of x', 'y = f^{\\prime\\prime}(x)'],
     ['43', 'F triple prime of x', 'y = f^{\\prime\\prime\\prime}(x)'],
+    ['44', 'Matrix', '\\left[ \\begin{array}{rr} 5 & -2 \\\\ 3 & 0 \\end{array} \\right]'],
+    ['45', 'Matrix #2', '\\left[ \\begin{array}{rr} 1 & 4 \\\\ 10 & 7 \\end{array} \\right]'],
+    ['46', 'Matrix #3', '\\left[ \\begin{array}{rr} 5 & -2 & 5 \\\\ 5 & 1 & -2 \\\\ 3 & 0 & 10 \\end{array} \\right]'],
+    ['47', 'Branched function', 'x = \\left\\{\\begin{array}{l} a + b = 0\\\\ \\varphi a + \\psi b = 1\\end{array}\\right.'],
+    ['48', 'Log', '\\log_b(xy) = \\log_b (x) + \\log_b (y), \\,'],
+    ['49', 'Union and Intersection', 'A \\cup B \\cap C'],
+    ['50', 'Some signs', 'A \\ne B \\leq C \\not\\subset \\Delta'],
+    ['51', 'More vars', 'l \\neq m'],
+    ['52', 'Area and Radius', '\\Area = \\pi\\radius^2'],
+    ['53', 'Brackets', '\\left(0, 1 \\right], \\left\\{ 10,4,3,4,5,6 \\right\\}, \\left[ 5,6 \\right]'],
 ].map(function (el) {
     return {
         id: el[0],

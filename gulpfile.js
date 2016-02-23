@@ -5,6 +5,7 @@ var browserSync = require('browser-sync');
 var concat = require('gulp-concat');
 var order = require('gulp-order');
 
+
 gulp.task('browser-sync', function () {
   browserSync({
     port: process.env.PORT || 3000,
@@ -17,13 +18,6 @@ gulp.task('browser-sync', function () {
 
 gulp.task('bs-reload', function () {
   browserSync.reload();
-});
-
-
-gulp.task('jshint', function () {
-  return gulp.src('/code/extensions/arabic/unpacked/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
 });
 
 
