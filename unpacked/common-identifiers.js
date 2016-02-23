@@ -2,8 +2,13 @@ MathJax.Hub.Config({
   // Math variables and functions
   Arabic: {
     identifiersMap: {
+      // Sets operations, and other stuff
+      'A': 'أ',
+      'B': 'ب',
+      'C': 'جـ',
+
       // Variable name
-      'a': 'ا',
+      'a': 'أ',
 
       // Variable name
       // TODO: Consider using Arabic letter dotless beh 0x66e instead
@@ -21,6 +26,10 @@ MathJax.Hub.Config({
 
       // Variable name
       'n': 'ن',
+
+      // Mixed use
+      'm': 'م',
+      'l': 'ل',
 
       // Function name
       // TODO: Consider using dotless qaf (ٯ) instead

@@ -4,7 +4,8 @@ MathJax.Hub.Config({
       // Math functions
       'sin': 'جا',
       'cos': 'جتا',
-      'tan': 'ظا'
+      'tan': 'ظا',
+      'log': 'لو'
     }
   }
 });
@@ -21,14 +22,16 @@ MathJax.Hub.Config({
 
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
-  // Better localized Zero
   var TeX = MathJax.Arabic.TeX;
+  var Text = MathJax.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
       dict: {
         // A macros to force English zero in both languages
-        "ZeroAr": ["zero", TeX('0', '\\text{0}')]
+        "Zero": ["zero", TeX('0', '\\text{0}')],  // Better localized Zero
+        "Radius": ["radius", Text('r', 'نق')],  // Circle radius
+        "Area": ["Area", Text('A', 'م')]  // Area of circles and other stuff
       }
     }
   });
