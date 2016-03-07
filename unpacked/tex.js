@@ -2,6 +2,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     var TEX = MathJax.InputJax.TeX;
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
+    var texParseAlignedArray = TEX.Parse.prototype.AlignedArray;
     var dict = MathJax.Hub.config.Arabic.dict;
 
 
@@ -132,15 +133,52 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
         var parsedToken = texParseMMLToken.apply(this, [token]);
 
         if ('ar' === this.stack.env.lang) {
-          if ('mn' === token.type) {
-            return this.arabicNumber(parsedToken);
-          } else if ('mi' === parsedToken.type) {
-            return this.arabicIdentifier(parsedToken);
-          } else if ('mo' === parsedToken.type) {
-            return this.arabicOperator(parsedToken);
-          }
+          this.markArabicToken(parsedToken);
         }
+
         return parsedToken;
+      },
+      markArabicToken: function (token) {
+        if ('mn' === token.type) {
+          return this.arabicNumber(token);
+        } else if ('mi' === token.type) {
+          return this.arabicIdentifier(token);
+        } else if ('mo' === token.type) {
+          return this.arabicOperator(token);
+        }
+
+        return token;
+      },
+      AlignedArray: function () {
+        // Helper to Arabize the matrices, arrays and piecewise functions.
+        var array = texParseAlignedArray.apply(this, arguments);
+        var _this = this;
+
+        if ('ar' === this.stack.env.lang) {
+          var arrayEndTable = array.EndTable;
+          array.EndTable = function () {
+            var retVal = arrayEndTable.apply(this, arguments);
+
+            // First level, iterate over the rows
+            array.table.forEach(function (row, rowIndex) {
+              // Second level, iterate over the columns
+              row.data.forEach(function (cell, colIndex) {
+                // Third level, iterate over the cell content
+                cell.data[0].data.forEach(function (token) {
+                  // Skip the first element of the matrix to solve a bug,
+                  // not sure why it is there.
+                  if (rowIndex || colIndex) {
+                    _this.markArabicToken(token);
+                  }
+                });
+              });
+            });
+
+            return retVal;
+          };
+        }
+
+        return array;
       },
       HandleArabic: function (name) {
         if (MathJax.Hub.config.Arabic.isArabicPage) {
