@@ -38,13 +38,8 @@ MathJax.Hub.Register.StartupHook('mml Jax Ready', function () {
 
           flipElement.className += ' ' + className;
 
-          if (Node.TEXT_NODE === element.firstChild.nodeType) {
-            flipElement.textContent = element.textContent;
-            element.textContent = '';
-          } else {
-            while (element.childNodes.length) {
-              flipElement.appendChild(element.firstChild);
-            }
+          while (element.childNodes.length) {
+            flipElement.appendChild(element.firstChild);
           }
 
           element.appendChild(flipElement);
