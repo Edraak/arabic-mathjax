@@ -4,6 +4,15 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var concat = require('gulp-concat');
 var order = require('gulp-order');
+var replace = require('gulp-replace');
+
+
+var plumb = plumber({
+  errorHandler: function (error) {
+    console.log(error.message);
+    this.emit('end');
+  }
+});
 
 
 gulp.task('browser-sync', function () {
@@ -21,8 +30,8 @@ gulp.task('bs-reload', function () {
 });
 
 
-gulp.task('scripts', function () {
-  return gulp.src('/code/extensions/arabic/unpacked/**/*.js')
+gulp.task('scripts-concat', function () {
+  return gulp.src('/code/src/**/*.js')
     .pipe(plumber({
       errorHandler: function (error) {
         console.log(error.message);
@@ -34,17 +43,32 @@ gulp.task('scripts', function () {
       '**/*.js'
     ]))
     .pipe(concat('arabic.js'))
+    .pipe(gulp.dest('/code/extensions/arabic/unpacked/'));
+});
+
+
+gulp.task('scripts-pack', ['scripts-concat'], function () {
+  return gulp.src('/code/extensions/arabic/unpacked/arabic.js')
+    .pipe(plumb)
     .pipe(uglify({
       preserveComments: 'some'
     }))
-    .pipe(gulp.dest('/code/extensions/arabic/'))
-    .pipe(browserSync.reload({
-      stream: true
+    .pipe(replace(/[^\x00-\x7F]/g, function (match) {
+      var hexCharCode = match.charCodeAt(0).toString(16);
+      var zeroPrefixed = ('0000' + hexCharCode).slice(-4);
+      return '\\u' + zeroPrefixed;
     }))
+    .pipe(replace('[Contrib]/arabic/unpacked/arabic.js', '[Contrib]/arabic/arabic.js'))
+    .pipe(gulp.dest('/code/extensions/arabic/'));
+});
+
+
+gulp.task('scripts', ['scripts-pack'], function () {
+  browserSync.reload();
 });
 
 
 gulp.task('default', ['scripts', 'browser-sync'], function () {
-  gulp.watch('/code/extensions/arabic/unpacked/**/*.js', ['scripts']);
+  gulp.watch('/code/code/**/*.js', ['scripts']);
   gulp.watch('/code/testcases/**/*.{html,css,js}', ['bs-reload']);
 });

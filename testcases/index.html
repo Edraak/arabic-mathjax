@@ -23,12 +23,24 @@
       MathJax.Ajax.config.path["Test"] = "http://testcases.127.0.0.1.xip.io/testcases/test-extensions";
 
       MathJax.Hub.Config({
+        TeX: {
+          extensions: [
+            "AMSmath.js",
+            "AMSsymbols.js"
+          ],
+        },
         extensions: [
-          "[Contrib]/arabic/arabic.js",
+          "[Contrib]/arabic/unpacked/arabic.js",
           "[Test]/phys1.js",
           "[Test]/hacks.js",
           "[Test]/phys2.js"
         ]
+      });
+
+      MathJax.Hub.Config({
+        'HTML-CSS': {
+          undefinedFamily: 'Amiri'
+        }
       });
 
       MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
