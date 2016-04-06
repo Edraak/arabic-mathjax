@@ -48,9 +48,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
           text = 'صفر';
 
           token.data[0].data[0] = text;
-          token = token.With({
-            fontLang: 'ar'
-          });
+          token.arabicFontLang = 'ar';
 
           return this.flipHorizontal(token);
         } else {

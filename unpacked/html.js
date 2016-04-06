@@ -1,79 +1,63 @@
-MathJax.Hub.Config({
-  'HTML-CSS': {
-    undefinedFamily: 'Amiri',
-    styles: {
-      '.mfliph': {
-        'display': 'inline-block !important',
-        '-moz-transform': 'scaleX(-1)',
-        '-webkit-transform': 'scaleX(-1)',
-        '-o-transform': 'scaleX(-1)',
-        'transform': 'scaleX(-1)',
-        '-ms-filter': 'fliph',
-        'filter': 'fliph'
-      },
-      '.mar': {
-        'font-family': 'Amiri !important',
-        'font-style': 'normal !important'
+MathJax.Hub.Register.StartupHook('HTML-CSS Jax Require', function () {
+  MathJax.Hub.Config({
+    'HTML-CSS': {
+      styles: {
+        '.MathJax .mfliph': {
+          'display': 'inline-block !important',
+          '-moz-transform': 'scaleX(-1)',
+          '-webkit-transform': 'scaleX(-1)',
+          '-o-transform': 'scaleX(-1)',
+          'transform': 'scaleX(-1)',
+          '-ms-filter': 'fliph',
+          'filter': 'fliph'
+        },
+        '.MathJax .mar': {
+          'font-style': 'normal !important'
+        },
+        '.MathJax .mar > span': {
+          'font-style': 'normal !important'
+        }
       }
     }
-  }
+  });
 });
 
 
-MathJax.Hub.Register.StartupHook('mml Jax Ready', function () {
-  MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
-    MathJax.Hub.Register.StartupHook('Arabic TeX Ready', function () {
-      var MML = MathJax.ElementJax.mml;
+MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
+  MathJax.Hub.Register.StartupHook('Arabic TeX Ready', function () {
+    var MML = MathJax.ElementJax.mml;
 
-      var flipHorizontalElement = function (token, element) {
-        var className = '';
+    var flipElementHorizontal = function (token, element) {
+      if (token.arabicFlipH) {
+        var flipElement = document.createElement('span');
 
-        if ('ar' === token.Get('fontLang')) {
-          className += ' ' + 'mar';
+        var className = ' mfliph';  // Keep the leading space
+
+        if ('ar' === token.arabicFontLang) {
+          className += ' mar';  // Keep the leading space
         }
 
-        if (token.Get('fliph')) {
-          var flipElement = document.createElement('span');
-          className += ' ' + 'mfliph';
+        flipElement.className = className;
 
-          flipElement.className += ' ' + className;
-
-          while (element.childNodes.length) {
+        if (element.firstChild) {
+          while (element.firstChild) {
             flipElement.appendChild(element.firstChild);
           }
-
-          element.appendChild(flipElement);
-        } else {
-          element.className += ' ' + className;
         }
-      };
 
-      var miToHTML = MML.mi.prototype.toHTML;
-      MML.mi.Augment({
-        toHTML: function (span) {
+        element.appendChild(flipElement);
+      }
+    };
 
-          var element = miToHTML.apply(this, [span]);
+    ['mn', 'mo', 'mi', 'msubsup', 'mrow', 'mfrac', 'mtext', 'ms'].forEach(function (name) {
+      var originalToHTML = MML[name].prototype.toHTML;
 
-          if (Node.TEXT_NODE === element.firstChild.nodeType) {
-            flipHorizontalElement(this, element);
-          } else {
-            flipHorizontalElement(this, element.firstChild);
-          }
-
+      MML[name].Augment({
+        toHTML: function () {
+          var element = originalToHTML.apply(this, arguments);
+          flipElementHorizontal(this, element);
           return element;
         }
-      });
-
-      ['mn', 'mo', 'mtext', 'msubsup', 'mrow', 'mfrac'].forEach(function (name) {
-        var originalToHTML = MML[name].prototype.toHTML;
-
-        MML[name].Augment({
-          toHTML: function (span) {
-            var element = originalToHTML.apply(this, [span]);
-            flipHorizontalElement(this, element);
-            return element;
-          }
-        });
       });
     });
   });

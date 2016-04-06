@@ -15,13 +15,13 @@ MathJax.Hub.Config({
       'b': 'ب',
 
       // Variable name.
-      // Suffixed with Unicdoe Arabic tatweel 0x0640
+      // Suffixed with Unicode Arabic Tatweel 0x0640
       'c': 'حـ',
 
       // Mixed use (Function, variable and (dx))
       'd': 'د',
 
-      // Mixed use. With Unicdoe Arabic tatweel 0x0640
+      // Mixed use. With Unicode Arabic Tatweel 0x0640
       'e': 'هـ',
 
       // Variable name

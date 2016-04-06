@@ -42,10 +42,9 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
     TEX.Parse.Augment({
       flipHorizontal: function (token) {
-        return token.With({
+        token.arabicFlipH = !token.arabicFlipH;
           // Invert the value, because flipping twice means, it is not flipped
-          fliph: !token.Get('fliph')
-        });
+        return token;
       },
       arabicNumber: function (token) {
         var numbersMap = MathJax.Hub.config.Arabic.numbersMap;
@@ -60,9 +59,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
         if (mapped !== text) {
           token.data[0].data[0] = mapped;
-          token = token.With({
-            fontLang: 'ar'
-          });
+          token.arabicFontLang = 'ar';
         }
 
         return this.flipHorizontal(token);
@@ -87,9 +84,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
         if (mapped !== text) {
           token.data[0].data[0] = mapped;
-          token = token.With({
-            fontLang: 'ar'
-          });
+          token.arabicFontLang = 'ar';
         }
 
         return this.flipHorizontal(token);
@@ -106,10 +101,8 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
         });
 
         if (mapped !== text) {
-          token = this.flipHorizontal(token).With({
-            fontLang: 'ar'
-          });
-
+          token = this.flipHorizontal(token);
+          token.arabicFontLang = 'ar';
           token.data[0].data[0] = mapped;
         }
 
@@ -187,12 +180,8 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
       },
       MarkAsArabic: function (name) {
         this.stack.env.lang = 'ar';
-
         var arg = this._getArgumentMML(name);
-
-        this.Push(this.flipHorizontal(arg).With({
-          lang: 'ar'
-        }));
+        this.Push(this.flipHorizontal(arg));
       },
       HandleFlipHorizontal: function (name) {
         var arg = this._getArgumentMML(name);
