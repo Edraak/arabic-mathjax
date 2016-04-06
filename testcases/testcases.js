@@ -54,6 +54,7 @@ var EQUATIONS = [
     ['51', 'More vars', 'l \\neq m'],
     ['52', 'Area and Radius', '\\Area = \\pi\\radius^2'],
     ['53', 'Brackets', '\\left(0, 1 \\right], \\left\\{ 10,4,3,4,5,6 \\right\\}, \\left[ 5,6 \\right]'],
+    ['54', 'Stretchy Arrow', '\\xrightarrow{\\Delta A + \\radius^{20}}\\ =\\ \\xrightarrow{B}'],
 ].map(function (el) {
     return {
         id: el[0],
