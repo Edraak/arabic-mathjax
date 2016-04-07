@@ -7,14 +7,6 @@ var order = require('gulp-order');
 var replace = require('gulp-replace');
 
 
-var plumb = plumber({
-  errorHandler: function (error) {
-    console.log(error.message);
-    this.emit('end');
-  }
-});
-
-
 gulp.task('browser-sync', function () {
   browserSync({
     port: process.env.PORT || 3000,
@@ -49,7 +41,12 @@ gulp.task('scripts-concat', function () {
 
 gulp.task('scripts-pack', ['scripts-concat'], function () {
   return gulp.src('/code/extensions/arabic/unpacked/arabic.js')
-    .pipe(plumb)
+    .pipe(plumber({
+      errorHandler: function (error) {
+        console.log(error.message);
+        this.emit('end');
+      }
+    }))
     .pipe(uglify({
       preserveComments: 'some'
     }))
@@ -69,6 +66,6 @@ gulp.task('scripts', ['scripts-pack'], function () {
 
 
 gulp.task('default', ['scripts', 'browser-sync'], function () {
-  gulp.watch('/code/code/**/*.js', ['scripts']);
+  gulp.watch('/code/src/**/*.js', ['scripts']);
   gulp.watch('/code/testcases/**/*.{html,css,js}', ['bs-reload']);
 });
