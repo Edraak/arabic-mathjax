@@ -1,9 +1,9 @@
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Stuff, that I've just copied!
 
-  var Text = MathJax.Arabic.Text;
-  var TeX = MathJax.Arabic.TeX;
-  var Symbols = MathJax.Arabic.Symbols;
+  var Text = MathJax.Extension.Arabic.Text;
+  var TeX = MathJax.Extension.Arabic.TeX;
+  var Symbols = MathJax.Extension.Arabic.Symbols;
 
   MathJax.Hub.Config({
     Arabic: {
@@ -32,8 +32,8 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Physics Names
 
-  var Text = MathJax.Arabic.Text;
-  var Symbols = MathJax.Arabic.Symbols;
+  var Text = MathJax.Extension.Arabic.Text;
+  var Symbols = MathJax.Extension.Arabic.Symbols;
 
   MathJax.Hub.Config({
     Arabic: {
@@ -54,8 +54,8 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Physics Constants
 
-  var Text = MathJax.Arabic.Text;
-  var TeX = MathJax.Arabic.TeX;
+  var Text = MathJax.Extension.Arabic.Text;
+  var TeX = MathJax.Extension.Arabic.TeX;
 
   MathJax.Hub.Config({
     Arabic: {
@@ -73,7 +73,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Chemistry Units
 
-  var Text = MathJax.Arabic.Text;
+  var Text = MathJax.Extension.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
@@ -89,7 +89,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Other Physics Units
 
-  var Text = MathJax.Arabic.Text;
+  var Text = MathJax.Extension.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
@@ -115,7 +115,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Misc
 
-  var Text = MathJax.Arabic.Text;
+  var Text = MathJax.Extension.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
@@ -129,7 +129,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   // Amplifiers
-  var Text = MathJax.Arabic.Text;
+  var Text = MathJax.Extension.Arabic.Text;
 
   MathJax.Hub.Config({
     Arabic: {
