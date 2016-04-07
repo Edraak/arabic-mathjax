@@ -144,7 +144,16 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return parsedToken;
       },
       markArabicToken: function (token) {
-        if ('mn' === token.type) {
+        if (token.arabicFontLang == 'ar') {
+          // There's no need to process the token again.
+          //
+          // This solves a bug in the matrix, when the first element
+          // is being process twice.
+          //
+          // Caveat: I'm not sure why the bug actually happens,
+          //         but this definitely solves it.
+          return token;
+        } else if ('mn' === token.type) {
           return this.arabicNumber(token);
         } else if ('mi' === token.type) {
           return this.arabicIdentifier(token);
@@ -157,7 +166,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       AlignedArray: function () {
         // Helper to Arabize the matrices, arrays and piecewise functions.
         var array = texParseAlignedArray.apply(this, arguments);
-        var _this = this;
+        var self = this;
 
         if ('ar' === this.stack.env.lang) {
           var arrayEndTable = array.EndTable;
@@ -169,13 +178,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
               // Second level, iterate over the columns
               row.data.forEach(function (cell, colIndex) {
                 // Third level, iterate over the cell content
-                cell.data[0].data.forEach(function (token) {
-                  // Skip the first element of the matrix to solve a bug,
-                  // not sure why it is there.
-                  if (rowIndex || colIndex) {
-                    _this.markArabicToken(token);
-                  }
-                });
+                cell.data[0].data.map(self.markArabicToken, self);
               });
             });
 
