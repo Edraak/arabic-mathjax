@@ -26,7 +26,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       });
 
       return new RegExp(identifiersKeys.map(escapeRegExp).join('|'), 'g');
-    });
+    }());
 
 
     TEX.Definitions.Add({
@@ -85,18 +85,17 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       },
       arabicIdentifier: function (token) {
         var text = token.data[0].data[0];
-        var mapped;
 
         if ('chars' === token.data[0].type) {
           // English Symbols like X and Y
-          mapped = text.replace(identifiersKeysRegExp, function (m) {
+          var mapped = text.replace(identifiersKeysRegExp, function (m) {
             return identifiersMap[m];
           });
-        }
 
-        if (mapped && mapped !== text) {
-          token.data[0].data[0] = mapped;
-          token.arabicFontLang = 'ar';
+          if (mapped !== text) {
+            token.data[0].data[0] = mapped;
+            token.arabicFontLang = 'ar';
+          }
         }
 
         return this.flipHorizontal(token);
