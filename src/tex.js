@@ -5,6 +5,29 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     var texParseAlignedArray = TEX.Parse.prototype.AlignedArray;
     var dict = MathJax.Hub.config.Arabic.dict;
 
+    var englishNumbersRegExp = /[0-9]/g;
+
+    var escapeRegExp = (function () {
+      var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+      var reHasRegExpChar = new RegExp(reRegExpChar.source);
+
+      return function (string) {
+        return (string && reHasRegExpChar.test(string))
+          ? string.replace(reRegExpChar, '\\$&')
+          : string;
+      };
+    }());
+
+    var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
+
+    var identifiersKeysRegExp = (function () {
+      var identifiersKeys = Object.keys(identifiersMap).sort(function (a, b) {
+        return b.length - a.length;
+      });
+
+      return new RegExp(identifiersKeys.map(escapeRegExp).join('|'), 'g');
+    });
+
 
     TEX.Definitions.Add({
       macros: {
@@ -49,12 +72,8 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       arabicNumber: function (token) {
         var numbersMap = MathJax.Hub.config.Arabic.numbersMap;
         var text = token.data[0].data[0];
-        var mapped = text;
-
-        Object.keys(numbersMap).forEach(function (arabicNumber) {
-          var hindiNumber = numbersMap[arabicNumber];
-          var regex = new RegExp('' + arabicNumber, 'g');
-          mapped = mapped.replace(regex, hindiNumber);
+        var mapped = text.replace(englishNumbersRegExp, function (m) {
+          return numbersMap[m];
         });
 
         if (mapped !== text) {
@@ -65,24 +84,17 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return this.flipHorizontal(token);
       },
       arabicIdentifier: function (token) {
-        var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
-        var identifiersKeys = Object.keys(identifiersMap).sort(function (a, b) {
-          return b.length - a.length;
-        });
-
         var text = token.data[0].data[0];
-        var mapped = text;
+        var mapped;
 
         if ('chars' === token.data[0].type) {
           // English Symbols like X and Y
-          identifiersKeys.forEach(function (enChar) {
-            var arChar = identifiersMap[enChar];
-            var regex = new RegExp(enChar, 'g');
-            mapped = mapped.replace(regex, arChar);
+          mapped = text.replace(identifiersKeysRegExp, function (m) {
+            return identifiersMap[m];
           });
         }
 
-        if (mapped !== text) {
+        if (mapped && mapped !== text) {
           token.data[0].data[0] = mapped;
           token.arabicFontLang = 'ar';
         }
