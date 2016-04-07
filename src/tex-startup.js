@@ -21,6 +21,7 @@ MathJax.Extension.Arabic = {
       ',': '،'
     }
   }),
+  arabicLanguageRegExp: /([\u0600-\u06FF]+)/g,
   TeX: function (english, arabic) {
     // Creates a translated TeX macro.
 
@@ -60,10 +61,10 @@ MathJax.Extension.Arabic = {
   Symbols: function (english, arabicSymbols) {
     // Creates a translated TeX macro that converts Arabic symbols into text nodes,
     // and treats everything else as normal TeX.
-
-    var arabicLanguageRegExp = /([\u0600-\u06FF]+)/g;
-
-    var arabic = arabicSymbols.replace(arabicLanguageRegExp, '\\fliph{\\text{$1}}');
+    var arabic = arabicSymbols.replace(
+      MathJax.Extension.Arabic.arabicLanguageRegExp,
+      '\\fliph{\\text{$1}}'
+    );
 
     return MathJax.Extension.Arabic.TeX(english, arabic);
   }
