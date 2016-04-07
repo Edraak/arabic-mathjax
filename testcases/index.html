@@ -53,30 +53,22 @@
     </script>
 
 
-  <script type="">
-    //
-    //  A function to display messages in the "AllMessages" area.
-    //  We make it global so it can be used in the startup code above.
-    //
-    window.Message = function (message) {
-      console.log(message);
-    };
-
+  <script type="text/x-mathjax-config">
     //
     //  Find out about ALL startup and hub messages
     //
     MathJax.Hub.Startup.signal.Interest(function (message) {
-      Message("Startup: " + message)
+      console.log("Startup: " + message)
     });
     MathJax.Hub.signal.Interest(function (message) {
-      Message("Hub: " + message)
+      console.log("Hub: " + message)
     });
     //
     //  Since signals are remembered, registering an interest will cause
     //  use to receive all the past signals as well as new ones.
     //  This marks the point were the above routines were called.
     //
-    Message("##### events above this have already occurred #####");
+    console.log("##### events above this have already occurred #####");
 
     //
     //  Display messages when these files are loaded
@@ -109,7 +101,7 @@
     //     message, so this message shows up first in the output.)
     //
     MathJax.Hub.Register.StartupHook("onLoad", function () {
-      Message("*** The onLoad handler has run, page is ready to process ***");
+      console.log("*** The onLoad handler has run, page is ready to process ***");
     });
 
     //
@@ -121,7 +113,7 @@
     //     looked up later when it is defined.)
     //
     MathJax.Hub.Queue(function () {
-      Message("*** MathJax is done ***");
+      console.log("*** MathJax is done ***");
     });
   </script>
 </head>
