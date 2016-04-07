@@ -41,7 +41,7 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
 
           return this.flipHorizontal(token);
         } else {
-          return texParseArabicNumber.apply(this, [token]);
+          return texParseArabicNumber.call(this, token);
         }
       }
     });
