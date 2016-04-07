@@ -18,15 +18,19 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       };
     }());
 
-    var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
-
-    var identifiersKeysRegExp = (function () {
-      var identifiersKeys = Object.keys(identifiersMap).sort(function (a, b) {
+    var getKeysRegExp = function (map) {
+      var keys = Object.keys(map).sort(function (a, b) {
         return b.length - a.length;
       });
 
-      return new RegExp(identifiersKeys.map(escapeRegExp).join('|'), 'g');
-    }());
+      return new RegExp(keys.map(escapeRegExp).join('|'), 'g');
+    };
+
+    var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
+    var identifiersKeysRegExp = getKeysRegExp(identifiersMap);
+
+    var operatorsMap = MathJax.Hub.config.Arabic.operatorsMap;
+    var operatorsKeysRegExp = getKeysRegExp(operatorsMap);
 
 
     TEX.Definitions.Add({
@@ -101,14 +105,9 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return this.flipHorizontal(token);
       },
       arabicOperator: function (token) {
-        var operatorsMap = MathJax.Hub.config.Arabic.operatorsMap;
         var text = token.data[0].data[0];
-        var mapped = text;
-
-        Object.keys(operatorsMap).forEach(function (enOperator) {
-          var regex = new RegExp('' + enOperator, 'g');
-          var arOperator = operatorsMap[enOperator];
-          mapped = mapped.replace(regex, arOperator);
+        var mapped = text.replace(operatorsKeysRegExp, function (m) {
+          return operatorsMap[m];
         });
 
         if (mapped !== text) {
