@@ -1,5 +1,5 @@
-MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
+MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
+  MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
     var TEX = MathJax.InputJax.TeX;
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
     var texParseAlignedArray = TEX.Parse.prototype.AlignedArray;
