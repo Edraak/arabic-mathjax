@@ -60,6 +60,8 @@ MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
         }
       });
     });
+
+    MathJax.Hub.Startup.signal.Post('Arabic Ready');
   });
 });
 
