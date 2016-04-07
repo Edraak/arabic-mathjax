@@ -128,13 +128,13 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         //
         //  TODO: Consider importing (as a dependency) this from HTML.js instead!
         var arg = this.ParseArg(name);
-        if (arg.inferred && arg.data.length == 1)
+        if (arg.inferred && arg.data.length === 1)
           {arg = arg.data[0]} else {delete arg.inferred}
         return arg;
       },
       mmlToken: function (token) {
         // TODO: Check for possible incompatibility with boldsymbol extension
-        var parsedToken = texParseMMLToken.apply(this, [token]);
+        var parsedToken = texParseMMLToken.call(this, token);
 
         if ('ar' === this.stack.env.lang) {
           this.markArabicToken(parsedToken);
@@ -143,7 +143,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return parsedToken;
       },
       markArabicToken: function (token) {
-        if (token.arabicFontLang == 'ar') {
+        if (token.arabicFontLang === 'ar') {
           // There's no need to process the token again.
           //
           // This solves a bug in the matrix, when the first element
