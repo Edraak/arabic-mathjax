@@ -1,38 +1,27 @@
-MathJax.Hub.Config({
-  Arabic: {
-    identifiersMap: {
-      // Math functions
-      'sin': 'جا',
-      'cos': 'جتا',
-      'tan': 'ظا',
-      'log': 'لو'
-    }
-  }
-});
-
-
-MathJax.Hub.Config({
-  Arabic: {
-    // Limits
-    operatorsMap: {
-      'lim': 'نهــا'
-    }
-  }
-});
-
-
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
-  var TeX = MathJax.Arabic.TeX;
-  var Text = MathJax.Arabic.Text;
+  var TeX = MathJax.Extension.Arabic.TeX;
+  var Text = MathJax.Extension.Arabic.Text;
 
-  MathJax.Hub.Config({
-    Arabic: {
-      dict: {
-        // A macros to force English zero in both languages
-        "Zero": ["zero", TeX('0', '\\text{0}')],  // Better localized Zero
-        "Radius": ["radius", Text('r', 'نق')],  // Circle radius
-        "Area": ["Area", Text('A', 'م')]  // Area of circles and other stuff
+  MathJax.Hub.CombineConfig("Arabic", {
+      identifiersMap: {
+        // Math functions
+        'sin': 'جا',
+        'cos': 'جتا',
+        'tan': 'ظا',
+        'log': 'لو'
+      },
+      // Limits
+      operatorsMap: {
+        'lim': 'نهــا'
       }
+    });
+
+  MathJax.Extension.Arabic.config = MathJax.Hub.CombineConfig('Arabic', {
+    dict: {
+      // A macros to force English zero in both languages
+      "Zero": ["zero", TeX('0', '\\text{0}')],  // Better localized Zero
+      "Radius": ["radius", Text('r', 'نق')],  // Circle radius
+      "Area": ["Area", Text('A', 'م')]  // Area of circles and other stuff
     }
   });
 

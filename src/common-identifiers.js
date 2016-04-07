@@ -1,6 +1,5 @@
-MathJax.Hub.Config({
-  // Math variables and functions
-  Arabic: {
+MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
+  MathJax.Extension.Arabic.config = MathJax.Hub.CombineConfig('Arabic', {
     identifiersMap: {
       // Sets operations, and other stuff
       'A': 'أ',
@@ -50,5 +49,5 @@ MathJax.Hub.Config({
       'y': 'ص',
       'z': 'ع'
     }
-  }
+  });
 });
