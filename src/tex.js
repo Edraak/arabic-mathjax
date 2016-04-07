@@ -127,8 +127,12 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         //
         //  TODO: Consider importing (as a dependency) this from HTML.js instead!
         var arg = this.ParseArg(name);
-        if (arg.inferred && arg.data.length === 1)
-          {arg = arg.data[0]} else {delete arg.inferred}
+        if (arg.inferred && arg.data.length === 1) {
+          arg = arg.data[0];
+        } else {
+          delete arg.inferred;
+        }
+
         return arg;
       },
       mmlToken: function (token) {
