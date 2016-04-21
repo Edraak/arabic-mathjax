@@ -63,6 +63,7 @@ var EQUATIONS = [
     ['72', 'Bare bones array', '\\begin{array}{l} 5 \\\\ h^6 \\end{array}'],
     ['73', 'Cases (Piecewise) Environment', '|x| = \\begin{cases} x  & \\transt{\\text{ if }}{ إذا } x \\ge 0 \\\\ -x & \\transt{\\text{ if }}{ إذا } x \\lt 0 \\end{cases}'],
     ['74', 'Parenthesis Matrix', '\\begin{pmatrix} aaa & b\\cr c   & ddd \\end{pmatrix}'],
+    ['78', 'More Math Functions', '\\cot x , \\sec y , \\csc z '],
 ].map(function (el) {
     return {
         id: el[0],

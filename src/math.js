@@ -7,6 +7,9 @@ MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
         'sin': 'جا',
         'cos': 'جتا',
         'tan': 'ظا',
+        'cot': 'ظتا',
+        'sec': 'قا',
+        'csc': 'قتا',
         'log': 'لو'
       },
       // Limits
