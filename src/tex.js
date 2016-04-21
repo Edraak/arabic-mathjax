@@ -141,10 +141,8 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return arg;
       },
       Push: function () {
-        // TODO: Check for possible incompatibility with boldsymbol extension
         var beforeLang = this.stack.env.lang;
         var retVal = texParsePush.apply(this, arguments);
-        console.logc('texPushAr after', 'before =', beforeLang, ' ... after =', this.stack.env.lang);
 
         // Huge giant hack to propagate `lang` from Arrays (and other environments?)
         // to their children fractions and others.
@@ -201,7 +199,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return helper.call(this, name);
       },
       MarkAsArabic: function (name) {
-        console.logc('MarkAsArabic', 'comp');
         this.stack.env.lang = 'ar';
         var arg = this._getArgumentMML(name);
         this.Push(this.flipHorizontal(arg));
