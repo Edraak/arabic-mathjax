@@ -60,14 +60,15 @@ MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
     };
 
     [
+      'mfrac',
+      'mi',
       'mn',
       'mo',
-      'mi',
-      'msubsup',
       'mrow',
-      'mfrac',
-      'mtext',
-      'ms'
+      'ms',
+      'msqrt',
+      'msubsup',
+      'mtext'
     ].forEach(makeElementFlippable);
 
     MathJax.Hub.Register.StartupHook('HTML-CSS mtable Ready', function () {
