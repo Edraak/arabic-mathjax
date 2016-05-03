@@ -64,6 +64,7 @@ var EQUATIONS = [
     ['73', 'Cases (Piecewise) Environment', '|x| = \\begin{cases} x  & \\transt{\\text{ if }}{ إذا } x \\ge 0 \\\\ -x & \\transt{\\text{ if }}{ إذا } x \\lt 0 \\end{cases}'],
     ['74', 'Parenthesis Matrix', '\\begin{pmatrix} aaa & b\\cr c   & ddd \\end{pmatrix}'],
     ['78', 'More Math Functions', '\\cot x , \\sec y , \\csc z '],
+    ['79', 'Single Square Root', '\\sqrt{2}'],
 ].map(function (el) {
     return {
         id: el[0],
