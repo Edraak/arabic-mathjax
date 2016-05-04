@@ -68,6 +68,7 @@ MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
       'ms',
       'msqrt',
       'msubsup',
+      'mroot',
       'mtext'
     ].forEach(makeElementFlippable);
 
