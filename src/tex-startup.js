@@ -1,5 +1,5 @@
 MathJax.Extension.Arabic = {
-  version: "1.0.0",
+  version: '1.0.0',
   config: MathJax.Hub.CombineConfig("Arabic", {
     dict: {},
     isArabicPage: (document.documentElement.lang === 'ar'),
@@ -17,8 +17,9 @@ MathJax.Extension.Arabic = {
       '9': '٩'
     },
     operatorsMap: {
-      // English to Arabic comma
-      ',': '،'
+      // English to Arabic punctuations
+      ',': '،',
+      ';': '؛'
     }
   }),
   arabicLanguageRegExp: /([\u0600-\u06FF]+)/g,

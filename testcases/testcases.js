@@ -65,6 +65,7 @@ var EQUATIONS = [
     ['74', 'Parenthesis Matrix', '\\begin{pmatrix} aaa & b\\cr c   & ddd \\end{pmatrix}'],
     ['78', 'More Math Functions', '\\cot x , \\sec y , \\csc z '],
     ['79', 'Single Square Root', '\\sqrt{2}'],
+    ['80', 'Semi colon', 'x=y; y=0'],
 ].map(function (el) {
     return {
         id: el[0],
