@@ -47,7 +47,7 @@ var EQUATIONS = [
     ['44', 'Matrix', '\\left[ \\begin{array}{rr} 5 & -2 \\\\ 3 & 0 \\end{array} \\right]'],
     ['45', 'Matrix #2', '\\left[ \\begin{array}{rr} 1 & 4 \\\\ 10 & 7 \\end{array} \\right]'],
     ['46', 'Matrix #3', '\\left[ \\begin{array}{rr} 5 & -2 & 5 \\\\ 5 && -2 \\\\ 3 & 0 & 10 \\end{array} \\right]'],
-    ['47', 'Piecewise (Branched) function', 'x = \\left\\{\\begin{array}{l} a + b = 0\\\\ \\varphi a + \\psi b = 1\\end{array}\\right.'],
+    ['47', 'Piecewise (Branched) function #1', 'x = \\left\\{\\begin{array}{l} a + b = 0\\\\ \\varphi a + \\psi b = 1\\end{array}\\right.'],
     ['48', 'Log', '\\log_b(xy) = \\log_b (x) + \\log_b (y), \\,'],
     ['49', 'Union and Intersection', 'A \\cup B \\cap C'],
     ['50', 'Some signs', 'A \\ne B \\leq C \\not\\subset \\Delta'],
@@ -55,6 +55,13 @@ var EQUATIONS = [
     ['52', 'Area and Radius', '\\Area = \\pi\\radius^2'],
     ['53', 'Brackets', '\\left(0, 1 \\right], \\left\\{ 10,4,3,4,5,6 \\right\\}, \\left[ 5,6 \\right]'],
     ['54', 'Stretchy Arrow', '\\xrightarrow{\\Delta A + \\radius^{20}}\\ =\\ \\xrightarrow{B}'],
+    ['55', 'Function composition', '(g \\circ h)(x) = h(g(x))'],
+    ['66', 'Piecewise Function #2', 'f(x) = \\left\\{\\begin{array}{l} \\left[ {1 \\over 2}x + 2 \\right]  \\ , 2 \\le x \\lt 4 \\\\ { \\left| 4x \\right| \\over x^2-36 } \\ , x \\ge 4 \\end{array}\\right.'],
+    ['67', 'Piecewise Function #3', 'f(x) = \\left\\{ \\begin{array}{l} ax^2 - bx \\ , x \\lt 3 \\\\ a x^3+6bx-9 \\ , x\\ge3 \\end{array}\\right.'],
+    ['68', 'Piecewise function #4 (Arabic)', 'x = \\left\\{\\begin{array}{l} abc + 10 \\\\ xyz + 20 \\end{array}\\right.'],
+    ['70', 'Polynomial', 'f(x) = ax^3+6bx-9'],
+    ['71', 'Array (Table)', 'f(x) = \\begin{array}{l} 4 \\\\ x^3 \\end{array}'],
+    ['72', 'Bare bones array', '\\begin{array}{l} 4 \\\\ x^3 \\end{array}'],
 ].map(function (el) {
     return {
         id: el[0],
