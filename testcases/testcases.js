@@ -67,6 +67,7 @@ var EQUATIONS = [
     ['79', 'Single Square Root', '\\sqrt{2}'],
     ['80', 'Semi colon', 'x=y; y=0'],
     ['81', 'Single right arrow', 'a \\rightarrow b'],
+    ['82', 'Factorial', 'n!'],
 ].map(function (el) {
     return {
         id: el[0],
