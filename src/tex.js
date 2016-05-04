@@ -135,6 +135,22 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
 
         return arg;
       },
+      Push: function () {
+        // TODO: Check for possible incompatibility with boldsymbol extension
+        var beforeLang = this.stack.env.lang;
+        var retVal = texParsePush.apply(this, arguments);
+        console.logc('texPushAr after', 'before =', beforeLang, ' ... after =', this.stack.env.lang);
+
+        // Huge giant hack to propagate `lang` from Arrays (and other environments?)
+        // to their children fractions and others.
+        if (beforeLang) {
+          if (!this.stack.env.lang) {
+            this.stack.env.lang = beforeLang;
+          }
+        }
+
+        return retVal;
+      },
       mmlToken: function (token) {
         // TODO: Check for possible incompatibility with boldsymbol extension
         var parsedToken = texParseMMLToken.call(this, token);
@@ -146,16 +162,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return parsedToken;
       },
       markArabicToken: function (token) {
-        if (token.arabicFontLang === 'ar') {
-          // There's no need to process the token again.
-          //
-          // This solves a bug in the matrix, when the first element
-          // is being process twice.
-          //
-          // Caveat: I'm not sure why the bug actually happens,
-          //         but this definitely solves it.
-          return token;
-        } else if ('mn' === token.type) {
+        if ('mn' === token.type) {
           return this.arabicNumber(token);
         } else if ('mi' === token.type) {
           return this.arabicIdentifier(token);
@@ -164,31 +171,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         }
 
         return token;
-      },
-      AlignedArray: function () {
-        // Helper to Arabize the matrices, arrays and piecewise functions.
-        var array = texParseAlignedArray.apply(this, arguments);
-        var self = this;
-
-        if ('ar' === this.stack.env.lang) {
-          var arrayEndTable = array.EndTable;
-          array.EndTable = function () {
-            var retVal = arrayEndTable.apply(this, arguments);
-
-            // First level, iterate over the rows
-            array.table.forEach(function (row, rowIndex) {
-              // Second level, iterate over the columns
-              row.data.forEach(function (cell, colIndex) {
-                // Third level, iterate over the cell content
-                cell.data[0].data.map(self.markArabicToken, self);
-              });
-            });
-
-            return retVal;
-          };
-        }
-
-        return array;
       },
       HandleArabic: function (name) {
         if (MathJax.Hub.config.Arabic.isArabicPage) {

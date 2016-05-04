@@ -53,15 +53,15 @@ var EQUATIONS = [
     ['50', 'Some signs', 'A \\ne B \\leq C \\not\\subset \\Delta'],
     ['51', 'More vars', 'l \\neq m'],
     ['52', 'Area and Radius', '\\Area = \\pi\\radius^2'],
-    ['53', 'Brackets', '\\left(0, 1 \\right], \\left\\{ 10,4,3,4,5,6 \\right\\}, \\left[ 5,6 \\right]'],
     ['54', 'Stretchy Arrow', '\\xrightarrow{\\Delta A + \\radius^{20}}\\ =\\ \\xrightarrow{B}'],
     ['55', 'Function composition', '(g \\circ h)(x) = h(g(x))'],
     ['66', 'Piecewise Function #2', 'f(x) = \\left\\{\\begin{array}{l} \\left[ {1 \\over 2}x + 2 \\right]  \\ , 2 \\le x \\lt 4 \\\\ { \\left| 4x \\right| \\over x^2-36 } \\ , x \\ge 4 \\end{array}\\right.'],
     ['67', 'Piecewise Function #3', 'f(x) = \\left\\{ \\begin{array}{l} ax^2 - bx \\ , x \\lt 3 \\\\ a x^3+6bx-9 \\ , x\\ge3 \\end{array}\\right.'],
     ['68', 'Piecewise function #4 (Arabic)', 'x = \\left\\{\\begin{array}{l} abc + 10 \\\\ xyz + 20 \\end{array}\\right.'],
     ['70', 'Polynomial', 'f(x) = ax^3+6bx-9'],
-    ['71', 'Array (Table)', 'f(x) = \\begin{array}{l} 4 \\\\ x^3 \\end{array}'],
-    ['72', 'Bare bones array', '\\begin{array}{l} 4 \\\\ x^3 \\end{array}'],
+    ['71', 'Array (Table)', 'q(x) = \\begin{array}{l} 1y & {z \\over a - 2} \\\\ be^3  & {c \\over g - 4} \\end{array}'],
+    ['72', 'Bare bones array', '\\begin{array}{l} 5 \\\\ h^6 \\end{array}'],
+    ['74', 'Parenthesis Matrix', '\\begin{pmatrix} aaa & b\\cr c   & ddd \\end{pmatrix}'],
 ].map(function (el) {
     return {
         id: el[0],
