@@ -68,4 +68,5 @@ gulp.task('scripts', ['scripts-pack'], function () {
 gulp.task('default', ['scripts', 'browser-sync'], function () {
   gulp.watch('/code/src/**/*.js', ['scripts']);
   gulp.watch('/code/testcases/**/*.{html,css,js}', ['bs-reload']);
+  gulp.watch('/code/mathjax/unpacked/jax/input/TeX/**/*.js', ['bs-reload']);
 });
