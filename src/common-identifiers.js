@@ -1,53 +1,33 @@
 MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
   MathJax.Extension.Arabic.config = MathJax.Hub.CombineConfig('Arabic', {
     identifiersMap: {
-      // Sets operations, and other stuff
+      // Set operations, and other stuff
       'A': 'أ',
       'B': 'ب',
       'C': 'جـ',
 
-      // Variable name
+      // Variable names
       'a': 'أ',
-
-      // Variable name
-      // TODO: Consider using Arabic letter dotless beh 0x66e instead
-      'b': 'ب',
-
-      // Variable name.
-      // Suffixed with Unicode Arabic Tatweel 0x0640
-      'c': 'حـ',
-
-      // Mixed use (Function, variable and (dx))
-      'd': 'د',
-
-      // Mixed use. With Unicode Arabic Tatweel 0x0640
-      'e': 'هـ',
-
-      // Variable name
+      'b': 'ب',  // TODO: Consider using Arabic letter dotless beh 0x66e instead
+      'c': 'حـ',  // Suffixed with Unicode Arabic Tatweel 0x0640
+      'x': 'س',
+      'y': 'ص',
+      'z': 'ع',
       'n': 'ن',
 
-      // Mixed use
-      'm': 'م',
-      'l': 'ل',
-
-      // Function name
-      // TODO: Consider using dotless qaf (ٯ) instead
-      'f': 'ق',
-
-      // Function name
-      'g': 'د',
+      // Function names
+      'f': 'ق',  // TODO: Consider using dotless qaf (ٯ) instead
+      'g': 'حـ',  // With Unicode Arabic Tatweel 0x0640
+      'h': 'هـ',  // With Unicode Arabic Tatweel 0x0640
 
       // Mixed use
       'k': 'ك',
-
-      // Mixed use
       'r': 'ر',
       't': 'ت',
-
-      // Variable names
-      'x': 'س',
-      'y': 'ص',
-      'z': 'ع'
+      'd': 'د',  // Function, variable and (dx)
+      'e': 'هـ',  // With Unicode Arabic Tatweel 0x0640
+      'm': 'م',
+      'l': 'ل'
     }
   });
 });
