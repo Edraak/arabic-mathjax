@@ -66,6 +66,7 @@ var EQUATIONS = [
     ['78', 'More Math Functions', '\\cot x , \\sec y , \\csc z '],
     ['79', 'Single Square Root', '\\sqrt{2}'],
     ['80', 'Semi colon', 'x=y; y=0'],
+    ['81', 'Single right arrow', 'a \\rightarrow b'],
 ].map(function (el) {
     return {
         id: el[0],
