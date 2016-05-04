@@ -196,6 +196,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         }
       },
       MarkAsArabic: function (name) {
+        console.logc('MarkAsArabic', 'comp');
         this.stack.env.lang = 'ar';
         var arg = this._getArgumentMML(name);
         this.Push(this.flipHorizontal(arg));
