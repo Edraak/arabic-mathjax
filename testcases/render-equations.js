@@ -1,36 +1,45 @@
 var renderEquations = function () {
   var $ = jQuery;
 
-  $.get('equations.html', function (template) {
-    var rendered = Mustache.render(template, {
-      equations: EQUATIONS
+  var loadTestCases = function (cb) {
+    $.get('testcases.yml', function (testcasesYAMLStr) {
+      cb(jsyaml.load(testcasesYAMLStr));
     });
+  };
 
-    $('#equations').html(rendered);
+
+  $.get('equations.html', function (template) {
+    loadTestCases(function (testCases) {
+      var rendered = Mustache.render(template, {
+        equations: testCases.equations.reverse()
+      });
+
+      $('#equations').html(rendered);
 
 
-    var render = function () {
-      var $scriptTemplate = $('<script type="math/tex; mode=display"><\/script>');
-      var equation = $('#dynamic-equation').val();
+      var render = function () {
+        var $scriptTemplate = $('<script type="math/tex; mode=display"><\/script>');
+        var equation = $('#dynamic-equation').val();
 
-      $('#dynamic-ar').html(
-        $scriptTemplate.clone().html(
-          '\\ar{' + equation + '}'
-        )
-      );
+        $('#dynamic-ar').html(
+          $scriptTemplate.clone().html(
+            '\\ar{' + equation + '}'
+          )
+        );
 
-      $('#dynamic-en').html(
-        $scriptTemplate.clone().html(
-          equation
-        )
-      );
+        $('#dynamic-en').html(
+          $scriptTemplate.clone().html(
+            equation
+          )
+        );
 
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    };
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      };
 
-    $('#dynamic-equation').change(render);
-    $('#show-dynamic-equation').click(render);
+      $('#dynamic-equation').change(render);
+      $('#show-dynamic-equation').click(render);
 
-    render();
+      render();
+    });
   });
 };

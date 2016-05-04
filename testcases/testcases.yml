@@ -1,0 +1,350 @@
+equations:
+  - id: "1"
+    name: "Fraction 1"
+    equation: > 
+      x=\frac{11+y}{1+2z^2}
+
+  - id: "2"
+    name: "Fraction 2"
+    equation: > 
+      x=\frac{1+y}{1+2z^2}
+
+  - id: "3"
+    name: "Fraction 3"
+    equation: > 
+      x=\frac{1+y}{1+2x^2}
+
+  - id: "4"
+    name: "Big fraction"
+    equation: > 
+      2 = \left( \frac{\left(3-x\right) \times 2}{3-x} \right)
+
+  - id: "5"
+    name: "Square"
+    equation: > 
+      x={-b\pm\sqrt{b^2-4ac} \over 2a}
+
+  - id: "6"
+    name: "Integration"
+    equation: > 
+      \int_\zero^\infty e^{-x^2} dx=\frac{\sqrt{\pi}}{2}
+
+  - id: "7"
+    name: "Superscript and subscript"
+    equation: > 
+      x = 10^{20}_5
+
+  - id: "8"
+    name: "Sum"
+    equation: > 
+      \sum_{n=1}^\infty {1\over n^2} = {\pi^2\over 6}
+
+  - id: "9"
+    name: "Lightspeed"
+    equation: > 
+      \lspeed = 299792458{m \over \scnd}
+
+  - id: "10"
+    name: "Initial charge"
+    equation: > 
+      q = 10
+
+  - id: "11"
+    name: "Energy"
+    equation: > 
+      E = x
+
+  - id: "12"
+    name: "Meter"
+    equation: > 
+      x = 10m + 20\cm
+
+  - id: "13"
+    name: "Misc symbols A"
+    equation: > 
+      a = \epsilonzero + \varepsilon
+
+  - id: "14"
+    name: "Misc symbols B"
+    equation: > 
+      b = \phi + \lambda + \theta + \Phi
+
+  - id: "15"
+    name: "Misc symbols C"
+    equation: > 
+      c = \eta + €
+
+  - id: "16"
+    name: "Plancks and Boltzmanns"
+    equation: > 
+      \Plancks \neq \Boltzmanns
+
+  - id: "17"
+    name: "Air Mass"
+    equation: > 
+      \AM = x
+
+  - id: "18"
+    name: "Radiation"
+    equation: > 
+      \rad = x
+
+  - id: "19"
+    name: "Amplifiers"
+    equation: > 
+      1\Mega, 2\nano, 3\Giga, 4\Tera, 3\kilo, 20\micro
+
+  - id: "20"
+    name: "Electricity"
+    equation: > 
+      \Watt = \Amp \times \volt
+
+  - id: "21"
+    name: "Sine and Cosine"
+    equation: > 
+      \tan \theta = {\cos \theta \over \sin \theta}
+
+  - id: "22"
+    name: "Temrature"
+    equation: > 
+      \Tmpr = 10\Klvn
+
+  - id: "23"
+    name: "Current"
+    equation: > 
+      \current = 10\Amp
+
+  - id: "24"
+    name: "ER #1"
+    equation: > 
+      \er
+
+  - id: "24.b"
+    name: "ER #2"
+    equation: > 
+      \er = x
+
+  - id: "25"
+    name: "The J stuff"
+    equation: > 
+      \J_\zero, \J_\ph, \J_\diffe, \J_\sc
+
+  - id: "26"
+    name: "Voltage of Open Circuit"
+    equation: > 
+      \V_\oc
+
+  - id: "27"
+    name: "Concentation Stuff"
+    equation: > 
+      \NA, \ND, \nii
+
+  - id: "28"
+    name: "Deplation Area"
+    equation: > 
+      \Wd = x
+
+  - id: "29"
+    name: "Farad"
+    equation: > 
+      \F = {{\scnd^4 \cdot \Amp^2} \over {\kilo\grm \cdot m^2}}
+
+  - id: "30"
+    name: "Diffusion Length"
+    equation: > 
+      \Ld = 10m
+
+  - id: "31"
+    name: "Electrons Diffusion"
+    equation: > 
+      \D_\ek
+
+  - id: "32"
+    name: "Electrons Motion Constant"
+    equation: > 
+      \mue
+
+  - id: "33"
+    name: "Hole"
+    equation: > 
+      20\hole
+
+  - id: "34"
+    name: "Electrons"
+    equation: > 
+      2 \elctrn
+
+  - id: "35"
+    name: "Time"
+    equation: > 
+      1\year = 365.25\day, 1\day = 24\hour
+
+  - id: "36"
+    name: "Max Watt"
+    equation: > 
+      \Watt_\max
+
+  - id: "37"
+    name: "Fill Factor"
+    equation: > 
+      \FF
+
+  - id: "38"
+    name: "Photovoltaic Energy"
+    equation: > 
+      \P_\inn
+
+  - id: "39"
+    name: "Limits"
+    equation: > 
+      e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n
+
+  - id: "40"
+    name: "Limits #2"
+    equation: > 
+      e^x=\lim_{4578545n\to\infty} y
+
+  - id: "41"
+    name: "F prime of x"
+    equation: > 
+      y = f^\prime(x)
+
+  - id: "42"
+    name: "F double prime of x"
+    equation: > 
+      y = f^{\prime\prime}(x)
+
+  - id: "43"
+    name: "F triple prime of x"
+    equation: > 
+      y = f^{\prime\prime\prime}(x)
+
+  - id: "44"
+    name: "Matrix"
+    equation: > 
+      \left[ \begin{array}{rr} 5 & -2 \\ 3 & \zero \end{array} \right]
+
+  - id: "45"
+    name: "Matrix #2"
+    equation: > 
+      \left[ \begin{array}{rr} 1 & 4 \\ 10 & 7 \end{array} \right]
+
+  - id: "46"
+    name: "Matrix #3"
+    equation: > 
+      \left[ \begin{array}{rr} 5 & -2 & 5 \\ 5 && -2 \\ 3 & \zero & 10 \end{array} \right]
+
+  - id: "47"
+    name: "Piecewise (Branched) function #1"
+    equation: > 
+      x = \left\{\begin{array}{l} a + b = 0\\ \varphi a + \psi b = 1\end{array}\right.
+
+  - id: "48"
+    name: "Log"
+    equation: > 
+      \log_b(xy) = \log_b (x) + \log_b (y), \,
+
+  - id: "49"
+    name: "Union and Intersection"
+    equation: > 
+      A \cup B \cap C
+
+  - id: "50"
+    name: "Some signs"
+    equation: > 
+      A \ne B \leq C \not\subset \Delta
+
+  - id: "51"
+    name: "More vars"
+    equation: > 
+      l \neq m
+
+  - id: "52"
+    name: "Area and Radius"
+    equation: > 
+      \Area = \pi\radius^2
+
+  - id: "54"
+    name: "Stretchy Arrow"
+    equation: > 
+      \xrightarrow{\Delta A + \radius^{20}}\ =\ \xrightarrow{B}
+
+  - id: "55"
+    name: "Function composition"
+    equation: > 
+      (g \circ h)(x) = h(g(x))
+
+  - id: "66"
+    name: "Piecewise Function #2"
+    equation: > 
+      f(x) = \left\{\begin{array}{l} \left[ {1 \over 2}x + 2 \right]  \ , 2 \le x \lt 4 \\ { \left| 4x \right| \over x^2-36 } \ , x \ge 4 \end{array}\right.
+
+  - id: "67"
+    name: "Piecewise Function #3"
+    equation: > 
+      f(x) = \left\{ \begin{array}{l} ax^2 - bx \ , x \lt 3 \\ a x^3+6bx-9 \ , x\ge3 \end{array}\right.
+
+  - id: "68"
+    name: "Piecewise function #4 (Arabic)"
+    equation: > 
+      x = \left\{\begin{array}{l} abc + 10 \\ xyz + 20 \end{array}\right.
+
+  - id: "70"
+    name: "Polynomial"
+    equation: > 
+      f(x) = ax^3+6bx-9
+
+  - id: "71"
+    name: "Array (Table)"
+    equation: > 
+      q(x) = \begin{array}{l} 1y & {z \over a - 2} \\ be^3  & {c \over g - 4} \end{array}
+
+  - id: "72"
+    name: "Bare bones array"
+    equation: > 
+      \begin{array}{l} 5 \\ h^6 \end{array}
+
+  - id: "73"
+    name: "Cases (Piecewise) Environment"
+    equation: > 
+      |x| = \begin{cases} x  & \transt{\text{ if }}{ إذا } x \ge 0 \\ -x & \transt{\text{ if }}{ إذا } x \lt 0 \end{cases}
+
+  - id: "74"
+    name: "Parenthesis Matrix"
+    equation: > 
+      \begin{pmatrix} aaa & b\cr c   & ddd \end{pmatrix}
+
+  - id: "78"
+    name: "More Math Functions"
+    equation: > 
+      \cot x , \sec y , \csc z 
+
+  - id: "79"
+    name: "Single Square Root"
+    equation: > 
+      \sqrt{2}
+
+  - id: "80"
+    name: "Semi colon"
+    equation: > 
+      x=y; y=0
+
+  - id: "81"
+    name: "Single right arrow"
+    equation: > 
+      a \rightarrow b
+
+  - id: "82"
+    name: "Factorial"
+    equation: > 
+      n!
+
+  - id: "83"
+    name: "Cube Root"
+    equation: > 
+      \sqrt[3]{2}
+
+  - id: "84"
+    name: "Upper case XYZ"
+    equation: > 
+      f(x) = (X \times Y \times Z) \, \transt{\text{or}}{أو} \, (XYZ)
