@@ -69,6 +69,7 @@ var EQUATIONS = [
     ['81', 'Single right arrow', 'a \\rightarrow b'],
     ['82', 'Factorial', 'n!'],
     ['83', 'Cube Root', '\\sqrt[3]{2}'],
+    ['84', 'Upper case XYZ', 'f(x) = (X \\times Y \\times Z) \\, \\transt{\\text{or}}{أو} \\, (XYZ)'],
 ].map(function (el) {
     return {
         id: el[0],

@@ -25,7 +25,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return b.length - a.length;
       });
 
-      return new RegExp(keys.map(escapeRegExp).join('|'), 'g');
+      return new RegExp(keys.map(escapeRegExp).join('|'), 'gi');
     };
 
     var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
@@ -98,7 +98,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         if ('chars' === token.data[0].type) {
           // English Symbols like X and Y
           var mapped = text.replace(identifiersKeysRegExp, function (m) {
-            return identifiersMap[m];
+            return identifiersMap[m.toLowerCase()];
           });
 
           if (mapped !== text) {
