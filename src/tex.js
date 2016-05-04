@@ -1,6 +1,8 @@
 MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
   MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
     var TEX = MathJax.InputJax.TeX;
+    var Arabic = MathJax.Extension.Arabic;
+    var texParsePush = TEX.Parse.prototype.Push;
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
     var texParseAlignedArray = TEX.Parse.prototype.AlignedArray;
     var dict = MathJax.Hub.config.Arabic.dict;
@@ -37,7 +39,10 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       macros: {
         'ar': 'HandleArabic',
         'alwaysar': 'MarkAsArabic',
-        'fliph': 'HandleFlipHorizontal'
+        'fliph': 'HandleFlipHorizontal',
+        'transx': 'TranslateTeX',
+        'transt': 'TranslateText',
+        'transs': 'TranslateSymbols'
       }
     });
 
@@ -176,6 +181,24 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         if (MathJax.Hub.config.Arabic.isArabicPage) {
           this.MarkAsArabic(name);
         }
+      },
+      TranslateTeX: function (name) {
+        var english = this.GetArgument(name);
+        var arabicText = this.GetArgument(name);
+        var helper = Arabic.TeX(english, arabicText);
+        return helper.call(this, name);
+      },
+      TranslateText: function (name) {
+        var english = this.GetArgument(name);
+        var arabicText = this.GetArgument(name);
+        var helper = Arabic.Text(english, arabicText);
+        return helper.call(this, name);
+      },
+      TranslateSymbols: function (name) {
+        var english = this.GetArgument(name);
+        var arabicText = this.GetArgument(name);
+        var helper = Arabic.Symbols(english, arabicText);
+        return helper.call(this, name);
       },
       MarkAsArabic: function (name) {
         console.logc('MarkAsArabic', 'comp');

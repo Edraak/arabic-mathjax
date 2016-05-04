@@ -61,6 +61,7 @@ var EQUATIONS = [
     ['70', 'Polynomial', 'f(x) = ax^3+6bx-9'],
     ['71', 'Array (Table)', 'q(x) = \\begin{array}{l} 1y & {z \\over a - 2} \\\\ be^3  & {c \\over g - 4} \\end{array}'],
     ['72', 'Bare bones array', '\\begin{array}{l} 5 \\\\ h^6 \\end{array}'],
+    ['73', 'Cases (Piecewise) Environment', '|x| = \\begin{cases} x  & \\transt{\\text{ if }}{ إذا } x \\ge 0 \\\\ -x & \\transt{\\text{ if }}{ إذا } x \\lt 0 \\end{cases}'],
     ['74', 'Parenthesis Matrix', '\\begin{pmatrix} aaa & b\\cr c   & ddd \\end{pmatrix}'],
 ].map(function (el) {
     return {
