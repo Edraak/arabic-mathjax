@@ -1,5 +1,5 @@
 MathJax.Extension.Arabic = {
-  version: "1.0.0",
+  version: '1.0.0',
   config: MathJax.Hub.CombineConfig("Arabic", {
     dict: {},
     isArabicPage: (document.documentElement.lang === 'ar'),
@@ -17,8 +17,9 @@ MathJax.Extension.Arabic = {
       '9': '٩'
     },
     operatorsMap: {
-      // English to Arabic comma
-      ',': '،'
+      // English to Arabic punctuations
+      ',': '،',
+      ';': '؛'
     }
   }),
   arabicLanguageRegExp: /([\u0600-\u06FF]+)/g,
@@ -42,21 +43,6 @@ MathJax.Extension.Arabic = {
     // Creates a translated TeX macro, with an Arabic plain text.
 
     return MathJax.Extension.Arabic.TeX(english, '\\fliph{\\text{' + arabicText + '}}');
-  },
-  TextWithSpace: function (english, arabicText) {
-    // Just like `Text` but adds one space before the Arabic text.
-
-    var arabic = '\\ \\fliph{\\text{' + arabicText + '}}';
-
-    return function (name) {
-      var TEX = MathJax.InputJax.TeX;
-
-      if ('ar' === this.stack.env.lang) {
-        this.Push(TEX.Parse(arabic).mml());
-      } else {
-        this.Push(TEX.Parse(english).mml());
-      }
-    };
   },
   Symbols: function (english, arabicSymbols) {
     // Creates a translated TeX macro that converts Arabic symbols into text nodes,

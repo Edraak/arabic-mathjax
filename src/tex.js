@@ -1,6 +1,8 @@
 MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
   MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
     var TEX = MathJax.InputJax.TeX;
+    var Arabic = MathJax.Extension.Arabic;
+    var texParsePush = TEX.Parse.prototype.Push;
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
     var texParseAlignedArray = TEX.Parse.prototype.AlignedArray;
     var dict = MathJax.Hub.config.Arabic.dict;
@@ -23,7 +25,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return b.length - a.length;
       });
 
-      return new RegExp(keys.map(escapeRegExp).join('|'), 'g');
+      return new RegExp(keys.map(escapeRegExp).join('|'), 'gi');
     };
 
     var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
@@ -37,7 +39,10 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       macros: {
         'ar': 'HandleArabic',
         'alwaysar': 'MarkAsArabic',
-        'fliph': 'HandleFlipHorizontal'
+        'fliph': 'HandleFlipHorizontal',
+        'transx': 'TranslateTeX',
+        'transt': 'TranslateText',
+        'transs': 'TranslateSymbols'
       }
     });
 
@@ -93,7 +98,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         if ('chars' === token.data[0].type) {
           // English Symbols like X and Y
           var mapped = text.replace(identifiersKeysRegExp, function (m) {
-            return identifiersMap[m];
+            return identifiersMap[m.toLowerCase()];
           });
 
           if (mapped !== text) {
@@ -135,6 +140,20 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
 
         return arg;
       },
+      Push: function () {
+        var beforeLang = this.stack.env.lang;
+        var retVal = texParsePush.apply(this, arguments);
+
+        // Huge giant hack to propagate `lang` from Arrays (and other environments?)
+        // to their children fractions and others.
+        if (beforeLang) {
+          if (!this.stack.env.lang) {
+            this.stack.env.lang = beforeLang;
+          }
+        }
+
+        return retVal;
+      },
       mmlToken: function (token) {
         // TODO: Check for possible incompatibility with boldsymbol extension
         var parsedToken = texParseMMLToken.call(this, token);
@@ -146,16 +165,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return parsedToken;
       },
       markArabicToken: function (token) {
-        if (token.arabicFontLang === 'ar') {
-          // There's no need to process the token again.
-          //
-          // This solves a bug in the matrix, when the first element
-          // is being process twice.
-          //
-          // Caveat: I'm not sure why the bug actually happens,
-          //         but this definitely solves it.
-          return token;
-        } else if ('mn' === token.type) {
+        if ('mn' === token.type) {
           return this.arabicNumber(token);
         } else if ('mi' === token.type) {
           return this.arabicIdentifier(token);
@@ -165,35 +175,28 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
 
         return token;
       },
-      AlignedArray: function () {
-        // Helper to Arabize the matrices, arrays and piecewise functions.
-        var array = texParseAlignedArray.apply(this, arguments);
-        var self = this;
-
-        if ('ar' === this.stack.env.lang) {
-          var arrayEndTable = array.EndTable;
-          array.EndTable = function () {
-            var retVal = arrayEndTable.apply(this, arguments);
-
-            // First level, iterate over the rows
-            array.table.forEach(function (row, rowIndex) {
-              // Second level, iterate over the columns
-              row.data.forEach(function (cell, colIndex) {
-                // Third level, iterate over the cell content
-                cell.data[0].data.map(self.markArabicToken, self);
-              });
-            });
-
-            return retVal;
-          };
-        }
-
-        return array;
-      },
       HandleArabic: function (name) {
         if (MathJax.Hub.config.Arabic.isArabicPage) {
           this.MarkAsArabic(name);
         }
+      },
+      TranslateTeX: function (name) {
+        var english = this.GetArgument(name);
+        var arabicText = this.GetArgument(name);
+        var helper = Arabic.TeX(english, arabicText);
+        return helper.call(this, name);
+      },
+      TranslateText: function (name) {
+        var english = this.GetArgument(name);
+        var arabicText = this.GetArgument(name);
+        var helper = Arabic.Text(english, arabicText);
+        return helper.call(this, name);
+      },
+      TranslateSymbols: function (name) {
+        var english = this.GetArgument(name);
+        var arabicText = this.GetArgument(name);
+        var helper = Arabic.Symbols(english, arabicText);
+        return helper.call(this, name);
       },
       MarkAsArabic: function (name) {
         this.stack.env.lang = 'ar';

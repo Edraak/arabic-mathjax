@@ -15,3 +15,22 @@ hr {
 .MathJax_Display {
     margin: 20px auto;
 }
+
+.inline-link {
+    opacity: 0;
+    display: block;
+    position: absolute;
+    background-color: white;
+    border: solid white;
+    border-width: 0 4px;
+    box-shadow: 1px 1px 3px black;
+    border-radius: 4px;
+}
+
+td:hover .inline-link {
+    opacity: 0.5;
+}
+
+td:hover .inline-link:hover {
+    opacity: 1;
+}

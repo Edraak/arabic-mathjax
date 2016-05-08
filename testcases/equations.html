@@ -19,8 +19,9 @@
         </td>
         <td>
             Enter your equation here:
-            <input id="dynamic-equation"
-                   value="x = 10" type="text" />
+            <br />
+            <br />
+            <textarea id="dynamic-equation" rows="3" cols="50">x = 10</textarea>
             <br />
             <button id="show-dynamic-equation">Show</button>
         </td>
@@ -34,15 +35,18 @@
                 <strong>#{{id}} {{name}}</strong>
             </a>
         </td>
-        <td>
+        <td id="eq_{{id}}_code">
+            <a class="inline-link" href="#eq_{{id}}_code">#</a>
             <code>{{{equation}}}</code>
         </td>
-        <td>
+        <td id="eq_{{id}}_en">
+            <a class="inline-link" href="#eq_{{id}}_en">#</a>
             <script type="math/tex; mode=display">
                 {{{equation}}}
             </script>
         </td>
-        <td>
+        <td id="eq_{{id}}_ar">
+            <a class="inline-link" href="#eq_{{id}}_ar">#</a>
             <script type="math/tex; mode=display">
                 \ar{
                     {{{equation}}}
