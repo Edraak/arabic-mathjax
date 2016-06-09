@@ -3,11 +3,11 @@ main:
 
   working_dir: /code/
   environment:
-    PORT: "80"
+    PORT: "1990"
   command: node node_modules/.bin/gulp
 
   ports:
-    - "80:80"
+    - "1990:1990"
 
   volumes:
     - ".:/code/"

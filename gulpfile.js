@@ -35,12 +35,12 @@ gulp.task('scripts-concat', function () {
       '**/*.js'
     ]))
     .pipe(concat('arabic.js'))
-    .pipe(gulp.dest('/code/extensions/arabic/unpacked/'));
+    .pipe(gulp.dest('/code/dist/unpacked/'));
 });
 
 
 gulp.task('scripts-pack', ['scripts-concat'], function () {
-  return gulp.src('/code/extensions/arabic/unpacked/arabic.js')
+  return gulp.src('/code/dist/unpacked/arabic.js')
     .pipe(plumber({
       errorHandler: function (error) {
         console.log(error.message);
@@ -56,11 +56,17 @@ gulp.task('scripts-pack', ['scripts-concat'], function () {
       return '\\u' + zeroPrefixed;
     }))
     .pipe(replace('[Contrib]/arabic/unpacked/arabic.js', '[Contrib]/arabic/arabic.js'))
+    .pipe(gulp.dest('/code/dist/'));
+});
+
+
+gulp.task('scripts-dist', ['scripts-pack'], function () {
+  return gulp.src('/code/dist/**/*.{js,txt,md}')
     .pipe(gulp.dest('/code/extensions/arabic/'));
 });
 
 
-gulp.task('scripts', ['scripts-pack'], function () {
+gulp.task('scripts', ['scripts-dist'], function () {
   browserSync.reload();
 });
 

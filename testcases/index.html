@@ -69,9 +69,9 @@
       var arabicExtensionPath;
 
       if (isLocalDevelopment) {
-          MathJax.Ajax.config.path["Contrib"] = "http://testcases.127.0.0.1.xip.io/extensions";
+          MathJax.Ajax.config.path["Contrib"] = "/extensions";
           arabicExtensionPath = "[Contrib]/arabic/unpacked/arabic.js";
-          MathJax.Ajax.config.path["Test"] = "http://testcases.127.0.0.1.xip.io/testcases/test-extensions";
+          MathJax.Ajax.config.path["Test"] = "/testcases/test-extensions";
       } else {
           MathJax.Ajax.config.path["Contrib"] = "//edraak.github.io/arabic-extension-static";
           arabicExtensionPath = "[Contrib]/arabic/arabic.js";
