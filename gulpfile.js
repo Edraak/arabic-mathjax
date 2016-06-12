@@ -5,15 +5,16 @@ var browserSync = require('browser-sync');
 var concat = require('gulp-concat');
 var order = require('gulp-order');
 var replace = require('gulp-replace');
+var runSequence = require('run-sequence');
 
-
-var unicodeEscapeArabicChars = replace(/[^\x00-\x7F]/g, function (match) {
+var unicodeEscapeArabicChars = function (match) {
   // Replaces arabic chars with their unicode equivalent.
   var hexCharCode = match.charCodeAt(0).toString(16);
   var zeroPrefixed = ('0000' + hexCharCode).slice(-4);
   return '\\u' + zeroPrefixed;
-});
+};
 
+var arabicCharsRegExp = /[^\x00-\x7F]/g;
 
 gulp.task('browser-sync', function () {
   browserSync({
@@ -43,12 +44,12 @@ gulp.task('scripts-concat', function () {
       '**/*.js'
     ]))
     .pipe(concat('arabic.js'))
-    .pipe(unicodeEscapeArabicChars)
+    .pipe(replace(arabicCharsRegExp, unicodeEscapeArabicChars))
     .pipe(gulp.dest('/code/dist/unpacked/'));
 });
 
 
-gulp.task('scripts-pack', ['scripts-concat'], function () {
+gulp.task('scripts-pack', function () {
   return gulp.src('/code/dist/unpacked/arabic.js')
     .pipe(plumber({
       errorHandler: function (error) {
@@ -59,20 +60,25 @@ gulp.task('scripts-pack', ['scripts-concat'], function () {
     .pipe(uglify({
       preserveComments: 'some'
     }))
-    .pipe(unicodeEscapeArabicChars)
+    .pipe(replace(arabicCharsRegExp, unicodeEscapeArabicChars))
     .pipe(replace('[Contrib]/arabic/unpacked/arabic.js', '[Contrib]/arabic/arabic.js'))
     .pipe(gulp.dest('/code/dist/'));
 });
 
 
-gulp.task('scripts-dist', ['scripts-pack'], function () {
+gulp.task('scripts-dist', function () {
   return gulp.src('/code/dist/**/*.{js,txt,md}')
     .pipe(gulp.dest('/code/extensions/arabic/'));
 });
 
 
-gulp.task('scripts', ['scripts-dist'], function () {
-  browserSync.reload();
+gulp.task('scripts', function () {
+  runSequence(
+    'scripts-concat',
+    'scripts-pack',
+    'scripts-dist',
+    'bs-reload'
+  );
 });
 
 
