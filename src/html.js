@@ -37,18 +37,14 @@ MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
           if (this.arabicFlipH) {
             var flipElement = document.createElement('span');
 
-            var className = ' mfliph';  // Keep the leading space
+            flipElement.className = 'mfliph';
 
             if ('ar' === this.arabicFontLang) {
-              className += ' mar';  // Keep the leading space
+              flipElement.className += ' mar'; // Keep the leading space
             }
 
-            flipElement.className = className;
-
-            if (element.firstChild) {
-              while (element.firstChild) {
-                flipElement.appendChild(element.firstChild);
-              }
+            while (element.firstChild) {
+              flipElement.appendChild(element.firstChild);
             }
 
             element.appendChild(flipElement);
