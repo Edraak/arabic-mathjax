@@ -106,8 +106,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
   var texParseMMLToken = TEX.Parse.prototype.mmlToken;
   var dict = MathJax.Hub.config.Arabic.dict;
 
-  var englishNumbersRegExp = /[0-9]/g;
-
   var escapeRegExp = (function () {
     var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
     var reHasRegExpChar = new RegExp(reRegExpChar.source);
@@ -124,12 +122,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
 
     return new RegExp(keys.map(escapeRegExp).join('|'), 'gi');
   };
-
-  var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
-  var identifiersKeysRegExp = getKeysRegExp(identifiersMap);
-
-  var operatorsMap = MathJax.Hub.config.Arabic.operatorsMap;
-  var operatorsKeysRegExp = getKeysRegExp(operatorsMap);
 
 
   TEX.Definitions.Add({
@@ -178,51 +170,71 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         // Invert the value, because flipping twice means, it is not flipped
       return token;
     },
-    arabicNumber: function (token) {
+    arabicNumber: (function () {
+      var englishNumbersRegExp = /[0-9]/g;
       var numbersMap = MathJax.Hub.config.Arabic.numbersMap;
-      var text = token.data[0].data[0];
-      var mapped = text.replace(englishNumbersRegExp, function (m) {
+
+      var replaceNumber = function (m) {
         return numbersMap[m];
-      });
+      };
 
-      if (mapped !== text) {
-        token.data[0].data[0] = mapped;
-        token.arabicFontLang = 'ar';
-      }
-
-      return this.flipHorizontal(token);
-    },
-    arabicIdentifier: function (token) {
-      var text = token.data[0].data[0];
-
-      if ('chars' === token.data[0].type) {
-        // English Symbols like X and Y
-        var mapped = text.replace(identifiersKeysRegExp, function (m) {
-          return identifiersMap[m.toLowerCase()];
-        });
+      return function (token) {
+        var text = token.data[0].data[0];
+        var mapped = text.replace(englishNumbersRegExp, replaceNumber);
 
         if (mapped !== text) {
           token.data[0].data[0] = mapped;
           token.arabicFontLang = 'ar';
         }
-      }
 
-      return this.flipHorizontal(token);
-    },
-    arabicOperator: function (token) {
-      var text = token.data[0].data[0];
-      var mapped = text.replace(operatorsKeysRegExp, function (m) {
+        return this.flipHorizontal(token);
+      }
+    }()),
+    arabicIdentifier: (function () {
+      var identifiersMap = MathJax.Hub.config.Arabic.identifiersMap;
+      var identifiersKeysRegExp = getKeysRegExp(identifiersMap);
+
+      var replaceIdentifier = function (m) {
+        return identifiersMap[m.toLowerCase()];
+      };
+
+      return function (token) {
+        var text = token.data[0].data[0];
+
+        if ('chars' === token.data[0].type) {
+          // English Symbols like X and Y
+          var mapped = text.replace(identifiersKeysRegExp, replaceIdentifier);
+
+          if (mapped !== text) {
+            token.data[0].data[0] = mapped;
+            token.arabicFontLang = 'ar';
+          }
+        }
+
+        return this.flipHorizontal(token);
+      }
+    }()),
+    arabicOperator: (function () {
+      var operatorsMap = MathJax.Hub.config.Arabic.operatorsMap;
+      var operatorsKeysRegExp = getKeysRegExp(operatorsMap);
+
+      var replaceOperator = function (m) {
         return operatorsMap[m];
-      });
+      };
 
-      if (mapped !== text) {
-        token = this.flipHorizontal(token);
-        token.arabicFontLang = 'ar';
-        token.data[0].data[0] = mapped;
+      return function (token) {
+        var text = token.data[0].data[0];
+        var mapped = text.replace(operatorsKeysRegExp, replaceOperator);
+
+        if (mapped !== text) {
+          token = this.flipHorizontal(token);
+          token.arabicFontLang = 'ar';
+          token.data[0].data[0] = mapped;
+        }
+
+        return token;
       }
-
-      return token;
-    },
+    }()),
     _getArgumentMML: function (name) {
       //  returns an argument that is a single MathML element
       //  (in an mrow if necessary)
