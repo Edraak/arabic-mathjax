@@ -348,3 +348,11 @@ equations:
     name: "Upper case XYZ"
     equation: > 
       f(x) = (X \times Y \times Z) \, \transt{\text{or}}{أو} \, (XYZ)
+
+  - id: "85"
+    name: "Partially Arabic (It should display: س=١ x=1)"
+    note: " (It's OK to break, check the code Comments)"
+    # Ref: https://github.com/mathjax/MathJax-third-party-extensions/pull/20#discussion_r63028905
+    hide_arabic: True
+    equation: >
+      \alwaysar{x=1} \, x=1

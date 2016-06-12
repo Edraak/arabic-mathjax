@@ -47,11 +47,18 @@
         </td>
         <td id="eq_{{id}}_ar">
             <a class="inline-link" href="#eq_{{id}}_ar">#</a>
-            <script type="math/tex; mode=display">
-                \ar{
-                    {{{equation}}}
-                }
-            </script>
+
+            {{#hide_arabic}}
+              <i>English-only test case.</i>
+            {{/hide_arabic}}
+
+            {{^hide_arabic}}
+              <script type="math/tex; mode=display">
+                  \ar{
+                      {{{equation}}}
+                  }
+              </script>
+            {{/hide_arabic}}
         </td>
     </tr>
     {{/equations}}
