@@ -113,9 +113,7 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     var reHasRegExpChar = new RegExp(reRegExpChar.source);
 
     return function (string) {
-      return (string && reHasRegExpChar.test(string))
-        ? string.replace(reRegExpChar, '\\$&')
-        : string;
+      return string.replace(reRegExpChar,'\\$&');
     };
   }());
 
