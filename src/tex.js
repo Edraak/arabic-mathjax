@@ -4,7 +4,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     var Arabic = MathJax.Extension.Arabic;
     var texParsePush = TEX.Parse.prototype.Push;
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
-    var texParseAlignedArray = TEX.Parse.prototype.AlignedArray;
     var dict = MathJax.Hub.config.Arabic.dict;
 
     var englishNumbersRegExp = /[0-9]/g;
