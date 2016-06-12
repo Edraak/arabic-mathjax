@@ -351,8 +351,13 @@ equations:
 
   - id: "85"
     name: "Partially Arabic (It should display: س=١ x=1)"
-    note: " (It's OK to break, check the code Comments)"
     # Ref: https://github.com/mathjax/MathJax-third-party-extensions/pull/20#discussion_r63028905
-    hide_arabic: True
+    raw_code: True
     equation: >
       \alwaysar{x=1} \, x=1
+
+  - id: "86"
+    name: "Test the tags"
+    raw_code: True
+    equation: >
+      \alwaysar{x=1, y=\sqrt{-1}} \tag{1}
