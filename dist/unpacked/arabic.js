@@ -25,35 +25,6 @@
  * THE SOFTWARE.
  */
 
-MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
-  MathJax.Extension.Arabic.config = MathJax.Hub.CombineConfig('Arabic', {
-    identifiersMap: {
-      // Variable names
-      'a': '\u0623',
-      'b': '\u0628',  // TODO: Consider using Arabic letter dotless beh 0x66e instead
-      'c': '\u062c\u0640',  // Suffixed with Unicode Arabic Tatweel 0x0640
-      'x': '\u0633',
-      'y': '\u0635',
-      'z': '\u0639',
-      'n': '\u0646',
-
-      // Function names
-      'f': '\u0642',  // TODO: Consider using dotless qaf (\u066f) instead
-      'g': '\u062c\u0640',  // With Unicode Arabic Tatweel 0x0640
-      'h': '\u0647\u0640',  // With Unicode Arabic Tatweel 0x0640
-
-      // Mixed use
-      'k': '\u0643',
-      'r': '\u0631',
-      't': '\u062a',
-      'd': '\u062f',  // Function, variable and (dx)
-      'e': '\u0647\u0640',  // With Unicode Arabic Tatweel 0x0640
-      'm': '\u0645',
-      'l': '\u0644'
-    }
-  });
-});
-
 MathJax.Hub.Register.StartupHook('HTML-CSS Jax Require', function () {
   MathJax.Hub.Config({
     'HTML-CSS': {
@@ -139,42 +110,48 @@ MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
   });
 });
 
-MathJax.Hub.Register.StartupHook('Arabic TeX Startup', function () {
-  var Text = MathJax.Extension.Arabic.Text;
-
-  MathJax.Hub.CombineConfig("Arabic", {
-      identifiersMap: {
-        // Math functions
-        'sin': '\u062c\u0627',
-        'cos': '\u062c\u062a\u0627',
-        'tan': '\u0638\u0627',
-        'cot': '\u0638\u062a\u0627',
-        'sec': '\u0642\u0627',
-        'csc': '\u0642\u062a\u0627',
-        'log': '\u0644\u0648'
-      },
-      // Limits
-      operatorsMap: {
-        'lim': '\u0646\u0647\u0640\u0640\u0627'
-      }
-    });
-
-  MathJax.Extension.Arabic.config = MathJax.Hub.CombineConfig('Arabic', {
-    dict: {
-      // A macros to force English zero in both languages
-      "Zero": ["zero", Text('0', '\u0635\u0641\u0631')],  // Better localized Zero
-      "Radius": ["radius", Text('r', '\u0646\u0642')],  // Circle radius
-      "Area": ["Area", Text('A', '\u0645')]  // Area of circles and other stuff
-    }
-  });
-});
-
 MathJax.Extension.Arabic = {
   version: '1.0.0',
   config: MathJax.Hub.CombineConfig("Arabic", {
-    dict: {},
-    isArabicPage: (document.documentElement.lang === 'ar'),
-    identifiersMap: {},
+    dict: {
+      // A macros to force English zero in both languages
+      'Zero': ['zero', 'Text', ['0', '\u0635\u0641\u0631']],  // Better localized Zero
+      'Radius': ['radius', 'Text', ['r', '\u0646\u0642']],  // Circle radius
+      'Area': ['Area', 'Text', ['A', '\u0645']]  // Area of circles and other stuff
+    },
+    identifiersMap: {
+      // Variable names
+      'a': '\u0623',
+      'b': '\u0628',  // TODO: Consider using Arabic letter dotless beh 0x66e instead
+      'c': '\u062c\u0640',  // Suffixed with Unicode Arabic Tatweel 0x0640
+      'x': '\u0633',
+      'y': '\u0635',
+      'z': '\u0639',
+      'n': '\u0646',
+
+      // Function names
+      'f': '\u0642',  // TODO: Consider using dotless qaf (\u066f) instead
+      'g': '\u062c\u0640',  // With Unicode Arabic Tatweel 0x0640
+      'h': '\u0647\u0640',  // With Unicode Arabic Tatweel 0x0640
+
+      // Mixed use
+      'k': '\u0643',
+      'r': '\u0631',
+      't': '\u062a',
+      'd': '\u062f',  // Function, variable and (dx)
+      'e': '\u0647\u0640',  // With Unicode Arabic Tatweel 0x0640
+      'm': '\u0645',
+      'l': '\u0644',
+
+      // Math functions
+      'sin': '\u062c\u0627',
+      'cos': '\u062c\u062a\u0627',
+      'tan': '\u0638\u0627',
+      'cot': '\u0638\u062a\u0627',
+      'sec': '\u0642\u0627',
+      'csc': '\u0642\u062a\u0627',
+      'log': '\u0644\u0648'
+    },
     numbersMap: {
       '0': '\u0660',
       '1': '\u0661',
@@ -190,8 +167,11 @@ MathJax.Extension.Arabic = {
     operatorsMap: {
       // English to Arabic punctuations
       ',': '\u060c',
-      ';': '\u061b'
-    }
+      ';': '\u061b',
+      // Limits
+      'lim': '\u0646\u0647\u0640\u0640\u0627'
+    },
+    isArabicPage: (document.documentElement.lang === 'ar')
   }),
   arabicLanguageRegExp: /([\u0600-\u06FF]+)/g,
   TeX: function (english, arabic) {
@@ -296,7 +276,10 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       var parsers = {};
 
       Object.keys(dict).forEach(function (key) {
-        parsers[key] = dict[key][1]; // Parser function
+        var helperName = dict[key][1];  // Text, TeX or Symbols
+        var helperParams = dict[key][2];
+
+        parsers[key] = Arabic[helperName].apply(null, helperParams);
       });
 
       return parsers;
@@ -430,8 +413,14 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return helper.call(this, name);
       },
       MarkAsArabic: function (name) {
+        var originalLang = this.stack.env.lang;
+
         this.stack.env.lang = 'ar';
         var arg = this._getArgumentMML(name);
+
+        // Reset the language for other elements.
+        this.stack.env.lang = originalLang;
+
         this.Push(this.flipHorizontal(arg));
       },
       HandleFlipHorizontal: function (name) {

@@ -65,7 +65,10 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       var parsers = {};
 
       Object.keys(dict).forEach(function (key) {
-        parsers[key] = dict[key][1]; // Parser function
+        var helperName = dict[key][1];  // Text, TeX or Symbols
+        var helperParams = dict[key][2];
+
+        parsers[key] = Arabic[helperName].apply(null, helperParams);
       });
 
       return parsers;
@@ -199,8 +202,14 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         return helper.call(this, name);
       },
       MarkAsArabic: function (name) {
+        var originalLang = this.stack.env.lang;
+
         this.stack.env.lang = 'ar';
         var arg = this._getArgumentMML(name);
+
+        console.log('originalLang', originalLang);
+        this.stack.env.lang = originalLang;  // Reset the language for other elements.
+
         this.Push(this.flipHorizontal(arg));
       },
       HandleFlipHorizontal: function (name) {
