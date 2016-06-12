@@ -43,10 +43,8 @@ MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
               flipElement.className += ' mar'; // Keep the leading space
             }
 
-            if (element.firstChild) {
-              while (element.firstChild) {
-                flipElement.appendChild(element.firstChild);
-              }
+            while (element.firstChild) {
+              flipElement.appendChild(element.firstChild);
             }
 
             element.appendChild(flipElement);
