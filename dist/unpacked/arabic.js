@@ -64,13 +64,11 @@ MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready', function () {
           if (this.arabicFlipH) {
             var flipElement = document.createElement('span');
 
-            var className = ' mfliph';  // Keep the leading space
+            flipElement.className = 'mfliph';
 
             if ('ar' === this.arabicFontLang) {
-              className += ' mar';  // Keep the leading space
+              flipElement.className += ' mar'; // Keep the leading space
             }
-
-            flipElement.className = className;
 
             if (element.firstChild) {
               while (element.firstChild) {
@@ -215,7 +213,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     var Arabic = MathJax.Extension.Arabic;
     var texParsePush = TEX.Parse.prototype.Push;
     var texParseMMLToken = TEX.Parse.prototype.mmlToken;
-    var texParseAlignedArray = TEX.Parse.prototype.AlignedArray;
     var dict = MathJax.Hub.config.Arabic.dict;
 
     var englishNumbersRegExp = /[0-9]/g;
@@ -418,8 +415,8 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
         this.stack.env.lang = 'ar';
         var arg = this._getArgumentMML(name);
 
-        // Reset the language for other elements.
-        this.stack.env.lang = originalLang;
+        console.log('originalLang', originalLang);
+        this.stack.env.lang = originalLang;  // Reset the language for other elements.
 
         this.Push(this.flipHorizontal(arg));
       },
