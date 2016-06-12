@@ -102,7 +102,7 @@ MathJax.Hub.Startup.signal.Post('Arabic TeX Startup');
 MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
   var TEX = MathJax.InputJax.TeX;
   var Arabic = MathJax.Extension.Arabic;
-  var texParsePush = TEX.Parse.prototype.Push;
+
   var texParseMMLToken = TEX.Parse.prototype.mmlToken;
   var dict = MathJax.Hub.config.Arabic.dict;
 
@@ -135,6 +135,22 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     }
   });
 
+  var array = TEX.Stack.Item.array;
+  var arrayClearEnv = array.prototype.clearEnv;
+
+  array.Augment({
+    clearEnv: function () {
+      // Propagate `lang` from Arrays to their children fractions and others.
+      // This is a bug in the MathJax itself, so this code should be removed once the bug is fixed.
+      var lang = this.env.lang;
+
+      arrayClearEnv.apply(this, arguments);
+
+      if (lang) {
+        this.env.lang = lang;
+      }
+    }
+  });
 
   TEX.Definitions.Add({
     macros: function () {
@@ -251,20 +267,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       }
 
       return arg;
-    },
-    Push: function () {
-      var beforeLang = this.stack.env.lang;
-      var retVal = texParsePush.apply(this, arguments);
-
-      // Huge giant hack to propagate `lang` from Arrays (and other environments?)
-      // to their children fractions and others.
-      if (beforeLang) {
-        if (!this.stack.env.lang) {
-          this.stack.env.lang = beforeLang;
-        }
-      }
-
-      return retVal;
     },
     mmlToken: function (token) {
       // TODO: Check for possible incompatibility with boldsymbol extension
