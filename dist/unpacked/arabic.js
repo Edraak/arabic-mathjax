@@ -215,11 +215,10 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
   var dict = MathJax.Hub.config.Arabic.dict;
 
   var escapeRegExp = (function () {
-    var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-    var reHasRegExpChar = new RegExp(reRegExpChar.source);
+    var regExpChar = /[\\^$.*+?()[\]{}|]/g;
 
     return function (string) {
-      return string.replace(reRegExpChar,'\\$&');
+      return string.replace(regExpChar,'\\$&');
     };
   }());
 
@@ -426,7 +425,6 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
       this.stack.env.lang = 'ar';
       var arg = this._getArgumentMML(name);
 
-      console.log('originalLang', originalLang);
       this.stack.env.lang = originalLang;  // Reset the language for other elements.
 
       this.Push(this.flipHorizontal(arg));
