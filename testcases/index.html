@@ -69,12 +69,12 @@
       var arabicExtensionPath;
 
       if (isLocalDevelopment) {
-          MathJax.Ajax.config.path["Contrib"] = "/extensions";
-          arabicExtensionPath = "[Contrib]/arabic/unpacked/arabic.js";
+          MathJax.Ajax.config.path["arabic"] = "/extensions/arabic";
+          arabicExtensionPath = "[arabic]/unpacked/arabic.js";
           MathJax.Ajax.config.path["Test"] = "/testcases/test-extensions";
       } else {
-          MathJax.Ajax.config.path["Contrib"] = "//edraak.github.io/arabic-extension-static";
-          arabicExtensionPath = "[Contrib]/arabic/arabic.js";
+          MathJax.Ajax.config.path["arabic"] = "//edraak.github.io/arabic-extension-static/arabic";
+          arabicExtensionPath = "[arabic]/arabic.js";
           MathJax.Ajax.config.path["Test"] = "//edraak.github.io/arabic-mathjax-dev/testcases/test-extensions";
       }
 

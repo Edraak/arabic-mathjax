@@ -17,11 +17,11 @@ and [configure](http://mathjax.readthedocs.org/en/latest/configuration.html) the
 
 Then you'll need to include the `arabic.js` as an extension, here's an example configuration:
 
-    MathJax.Ajax.config.path["Contrib"] = "//cdn.mathjax.org/mathjax/contrib";
+    MathJax.Ajax.config.path["arabic"] = "//path/to/arabic/";
 
     MathJax.Hub.Config({
         extensions: [
-            "[Contrib]/arabic/arabic.js"
+            "[arabic]/arabic.js"
         ]
     });
 

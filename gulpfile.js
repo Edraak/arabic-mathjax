@@ -61,7 +61,7 @@ gulp.task('scripts-pack', function () {
       preserveComments: 'some'
     }))
     .pipe(replace(arabicCharsRegExp, unicodeEscapeArabicChars))
-    .pipe(replace('[Contrib]/arabic/unpacked/arabic.js', '[Contrib]/arabic/arabic.js'))
+    .pipe(replace('[arabic]/unpacked/arabic.js', '[arabic]/arabic.js'))
     .pipe(gulp.dest('/code/dist/'));
 });
 
