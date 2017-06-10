@@ -163,6 +163,9 @@ Even better, grab my docker-based development environment from here so you can h
     $ cd arabic-mathjax
     $ git clone git@github.com:Edraak/MathJax-third-party-extensions.git extensions
     $ git clone git@github.com:mathjax/MathJax mathjax
+    $ cd mathjax
+    $ git checkout 2.6.1
+    $ cd ..
     $ git clone git@github.com:Edraak/arabic-extension-static.git static
     $ make init
     $ docker-compose up
