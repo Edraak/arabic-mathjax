@@ -97,9 +97,9 @@ The extension provides the following additional TeX commands to be typeset an Ar
 
  - Bilingual commands, which prints the first argument on English pages and the second argument on Arabic pages.
    Useful to to build bilingual equations for strings that the extension provides no explicit support to.
-   **Note** The first (English) argument is always a TeX input, while the second (Arabic) can be 
+   **Note** The first (English) argument is always a TeX input, while the second (Arabic) can be
    TeX, Text or TeX with Symbols, depending on the command you're using.
-     * **Translate a TeX input** `\transx` 
+     * **Translate a TeX input** `\transx`
      * **Translate a text input** `\transt` e.g. `\transt{\text{if}}{إذا}` for the Math piecewise equations.
      * **Translate a TeX input with Arabic symbols** `\transs`: e.g. `\transs{A_b}{أ_ب}`
 
@@ -159,7 +159,14 @@ at the following extensions:
 Well, just issue a pull request to this repo and ping me (my GitHub username is @OmarIthawi).
 Even better, grab my docker-based development environment from here so you can have a better development experience:
 
- - [github.com/Edraak/arabic-mathjax-dev](https://github.com/Edraak/arabic-mathjax-dev)
+    $ git clone https://github.com/Edraak/arabic-mathjax.git
+    $ cd arabic-mathjax
+    $ git clone git@github.com:Edraak/MathJax-third-party-extensions.git extensions
+    $ git clone git@github.com:mathjax/MathJax mathjax
+    $ git clone git@github.com:Edraak/arabic-extension-static.git static
+    $ make init
+    $ docker-compose up
+
 
 # License
 The MIT License
