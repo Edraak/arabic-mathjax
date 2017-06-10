@@ -13,11 +13,11 @@ It provides the following:
 ## How to Use the Extension
 ### Install the Extension
 First you'd like to [install](http://mathjax.readthedocs.org/en/latest/installation.html)
-and [configure](http://mathjax.readthedocs.org/en/latest/configuration.html) the MathJax in your page.
+and [configure](http://mathjax.readthedocs.org/en/latest/configuration.html) MathJax in your page.
 
 Then you'll need to include the `arabic.js` as an extension, here's an example configuration:
 
-    MathJax.Ajax.config.path["arabic"] = "//path/to/arabic/";
+    MathJax.Ajax.config.path["arabic"] = "https://cdn.rawgit.com/Edraak/arabic-mathjax/v1.0/dist";
 
     MathJax.Hub.Config({
         extensions: [
@@ -97,9 +97,9 @@ The extension provides the following additional TeX commands to be typeset an Ar
 
  - Bilingual commands, which prints the first argument on English pages and the second argument on Arabic pages.
    Useful to to build bilingual equations for strings that the extension provides no explicit support to.
-   **Note** The first (English) argument is always a TeX input, while the second (Arabic) can be 
+   **Note** The first (English) argument is always a TeX input, while the second (Arabic) can be
    TeX, Text or TeX with Symbols, depending on the command you're using.
-     * **Translate a TeX input** `\transx` 
+     * **Translate a TeX input** `\transx`
      * **Translate a text input** `\transt` e.g. `\transt{\text{if}}{إذا}` for the Math piecewise equations.
      * **Translate a TeX input with Arabic symbols** `\transs`: e.g. `\transs{A_b}{أ_ب}`
 
@@ -141,14 +141,14 @@ Additional extensions for Physics and some Chemistry units and symbols exists,
 however, it is not tested/developed well. If you're curious, you can take a look
 at the following extensions:
 
- - [`phys1.js`](https://github.com/Edraak/arabic-mathjax-dev/blob/master/testcases/test-extensions/phys1.js):
+ - [`phys1.js`](https://github.com/Edraak/arabic-mathjax/blob/master/testcases/test-extensions/phys1.js):
    Contains general physics units like Farad and speed of light. Interesting stuff, but haven't had proper
    testing and usage (yet).
 
- - [`phys2.js`](https://github.com/Edraak/arabic-mathjax-dev/blob/master/testcases/test-extensions/phys2.js):
+ - [`phys2.js`](https://github.com/Edraak/arabic-mathjax/blob/master/testcases/test-extensions/phys2.js):
    Additional advanced physics units that I don't understand as much!
 
- - [`hacks.js`](https://github.com/Edraak/arabic-mathjax-dev/blob/master/testcases/test-extensions/hacks.js):
+ - [`hacks.js`](https://github.com/Edraak/arabic-mathjax/blob/master/testcases/test-extensions/hacks.js):
    A hack to convert the English decimal mark from `.` to `٫`
    ([Arabic decimal mark, Unicode 0x066b](http://www.unicodemap.org/details/0x066B/index.html)).
    Although the Arabic decimal mark exists, I'm not sure if it is
@@ -159,7 +159,14 @@ at the following extensions:
 Well, just issue a pull request to this repo and ping me (my GitHub username is @OmarIthawi).
 Even better, grab my docker-based development environment from here so you can have a better development experience:
 
- - [github.com/Edraak/arabic-mathjax-dev](https://github.com/Edraak/arabic-mathjax-dev)
+    $ git clone https://github.com/Edraak/arabic-mathjax.git
+    $ cd arabic-mathjax
+    $ git clone git@github.com:Edraak/MathJax-third-party-extensions.git extensions
+    $ git clone git@github.com:mathjax/MathJax mathjax
+    $ git clone git@github.com:Edraak/arabic-extension-static.git static
+    $ make init
+    $ docker-compose up
+
 
 # License
 The MIT License
