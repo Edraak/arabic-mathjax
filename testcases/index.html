@@ -8,8 +8,8 @@
       var isLocalDevelopment = (location.host.indexOf('local') !== -1);
     </script>
 
-    <link href="http://fonts.googleapis.com/css?family=Amiri&amp;subset=arabic" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Amiri&amp;subset=arabic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/earlyaccess/droidarabicnaskh.css" rel="stylesheet" type="text/css">
 
     <link href="style.css" rel="stylesheet" type="text/css">
 
@@ -26,7 +26,7 @@
         if (isLocalDevelopment) {
           mathjaxScript = '/mathjax/unpacked/MathJax.js?config=' + mathjaxConfigs;
         } else {
-          mathjaxScript = '//cdn.mathjax.org/mathjax/latest/unpacked/MathJax.js?config=' + mathjaxConfigs;
+          mathjaxScript = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=' + mathjaxConfigs;
         }
 
         var script = document.createElement("script");
@@ -73,9 +73,9 @@
           arabicExtensionPath = "[arabic]/unpacked/arabic.js";
           MathJax.Ajax.config.path["Test"] = "/testcases/test-extensions";
       } else {
-          MathJax.Ajax.config.path["arabic"] = "//edraak.github.io/arabic-extension-static/arabic";
+          MathJax.Ajax.config.path["arabic"] = "../dist/";
           arabicExtensionPath = "[arabic]/arabic.js";
-          MathJax.Ajax.config.path["Test"] = "//edraak.github.io/arabic-mathjax-dev/testcases/test-extensions";
+          MathJax.Ajax.config.path["Test"] = "test-extensions";
       }
 
       MathJax.Hub.Config({
