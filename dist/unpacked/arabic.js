@@ -244,11 +244,23 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
 
   var array = TEX.Stack.Item.array;
   var arrayClearEnv = array.prototype.clearEnv;
+  var arrayInit = array.prototype.Init;
 
   array.Augment({
+    Init: function () {
+      // Overcome the copyEnv issue that has been introduced in:
+      //  - Pull Request: https://github.com/mathjax/MathJax/pull/1523
+      //
+      // Otherwise arrays won't be Arabized.
+      //  - Bug Report: https://groups.google.com/forum/#!topic/mathjax-dev/cWoTKcwMqmY
+      arrayInit.apply(this, arguments);
+      this.copyEnv = true;
+    },
     clearEnv: function () {
       // Propagate `lang` from Arrays to their children fractions and others.
       // This is a bug in the MathJax itself, so this code should be removed once the bug is fixed.
+      // Follow up on https://github.com/mathjax/MathJax/pull/1523
+      // It's still not clear how/when a proper solution is possible.
       var lang = this.env.lang;
 
       arrayClearEnv.apply(this, arguments);
