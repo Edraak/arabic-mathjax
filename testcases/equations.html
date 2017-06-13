@@ -39,27 +39,32 @@
             <a class="inline-link" href="#eq_{{id}}_code">#</a>
             <code>{{{equation}}}</code>
         </td>
-        <td id="eq_{{id}}_en">
+
+        {{^raw_code}}
+          <td id="eq_{{id}}_en">
             <a class="inline-link" href="#eq_{{id}}_en">#</a>
             <script type="math/tex; mode=display">
-                {{{equation}}}
+              {{{equation}}}
             </script>
-        </td>
-        <td id="eq_{{id}}_ar">
-            <a class="inline-link" href="#eq_{{id}}_ar">#</a>
-
-            {{#hide_arabic}}
-              <i>English-only test case.</i>
-            {{/hide_arabic}}
-
-            {{^hide_arabic}}
+          </td>
+          <td id="eq_{{id}}_ar">
+              <a class="inline-link" href="#eq_{{id}}_ar">#</a>
               <script type="math/tex; mode=display">
-                  \ar{
-                      {{{equation}}}
-                  }
+                \ar{
+                  {{{equation}}}
+                }
               </script>
-            {{/hide_arabic}}
-        </td>
+          </td>
+        {{/raw_code}}
+
+        {{#raw_code}}
+          <td id="eq_{{id}}_raw" colspan="2">
+              <a class="inline-link" href="#eq_{{id}}_raw">#</a>
+              <script type="math/tex; mode=display">
+                {{{equation}}}
+              </script>
+          </td>
+        {{/raw_code}}
     </tr>
     {{/equations}}
 </table>
